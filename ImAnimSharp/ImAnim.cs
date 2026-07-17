@@ -7,7 +7,6 @@ using Dalamud.Bindings.ImGui;
 
 namespace ImAnimSharp;
 
-// TODO: iam_path https://github.com/soufianekhiat/ImAnim/blob/0e28f285/docs/path-morphing.md
 // TODO: Helper functions for variations https://github.com/soufianekhiat/ImAnim/blob/0e28f285/docs/variations.md
 
 public static unsafe class ImAnim
@@ -1055,6 +1054,13 @@ public static unsafe class ImAnim
     }
 
     // Query path info
+
+    public static ImAnimPath PathBegin(uint pathId, Vector2 start)
+    {
+        ImAnimPath ret = default;
+        ImAnimNative.PathBegin(&ret, pathId, &start);
+        return ret;
+    }
 
     /// <summary>
     /// Check if path exists.

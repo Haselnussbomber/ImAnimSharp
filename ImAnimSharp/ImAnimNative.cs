@@ -299,6 +299,27 @@ public static unsafe partial class ImAnimNative
     // Motion Paths - animate along curves and splines
     // ----------------------------------------------------
 
+    [LibraryImport(LibName, EntryPoint = "c_iam_path_begin")]
+    public static partial void PathBegin(ImAnimPath* pOut, uint pathId, Vector2* start);
+
+    [LibraryImport(LibName, EntryPoint = "c_iam_path_end")]
+    public static partial void PathEnd(ImAnimPath* pPath);
+
+    [LibraryImport(LibName, EntryPoint = "c_iam_path_line_to")]
+    public static partial void PathLineTo(ImAnimPath* pPath, Vector2* end);
+
+    [LibraryImport(LibName, EntryPoint = "c_iam_path_quadratic_to")]
+    public static partial void PathQuadraticTo(ImAnimPath* pPath, Vector2* ctrl, Vector2* end);
+
+    [LibraryImport(LibName, EntryPoint = "c_iam_path_cubic_to")]
+    public static partial void PathCubicTo(ImAnimPath* pPath, Vector2* ctrl1, Vector2* ctrl2, Vector2* end);
+
+    [LibraryImport(LibName, EntryPoint = "c_iam_path_catmull_to")]
+    public static partial void PathCubicTo(ImAnimPath* pPath, Vector2* end, float tension);
+
+    [LibraryImport(LibName, EntryPoint = "c_iam_path_close")]
+    public static partial void PathClose(ImAnimPath* pPath);
+
     // Single-curve evaluation functions (stateless, for direct use)
 
     [LibraryImport(LibName, EntryPoint = "c_iam_bezier_quadratic")]

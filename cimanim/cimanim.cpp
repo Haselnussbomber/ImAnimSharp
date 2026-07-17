@@ -134,6 +134,14 @@ CIMGUI_API void   c_iam_tween_color_per_axis(ImVec4* pOut, ImGuiID id, ImGuiID c
 // Motion Paths - animate along curves and splines
 // ----------------------------------------------------
 
+CIMGUI_API void   c_iam_path_begin(iam_path* pOut, ImGuiID path_id, ImVec2* start) { *pOut = iam_path::begin(path_id, *start); }
+CIMGUI_API void   c_iam_path_end(iam_path* pPath) { pPath->end(); }
+CIMGUI_API void   c_iam_path_line_to(iam_path* pPath, ImVec2* end) { pPath->line_to(*end); }
+CIMGUI_API void   c_iam_path_quadratic_to(iam_path* pPath, ImVec2* ctrl, ImVec2* end) { pPath->quadratic_to(*ctrl, *end); }
+CIMGUI_API void   c_iam_path_cubic_to(iam_path* pPath, ImVec2* ctrl1, ImVec2* ctrl2, ImVec2* end) { pPath->cubic_to(*ctrl1, *ctrl2, *end); }
+CIMGUI_API void   c_iam_path_catmull_to(iam_path* pPath, ImVec2* end, float tension) { pPath->catmull_to(*end, tension); }
+CIMGUI_API void   c_iam_path_close(iam_path* pPath) { pPath->close(); }
+
 // Single-curve evaluation functions (stateless, for direct use)
 CIMGUI_API void   c_iam_bezier_quadratic(ImVec2* pOut, ImVec2* p0, ImVec2* p1, ImVec2* p2, float t) { *pOut = iam_bezier_quadratic(*p0, *p1, *p2, t); }
 CIMGUI_API void   c_iam_bezier_cubic(ImVec2* pOut, ImVec2* p0, ImVec2* p1, ImVec2* p2, ImVec2* p3, float t) { *pOut = iam_bezier_cubic(*p0, *p1, *p2, *p3, t); }
