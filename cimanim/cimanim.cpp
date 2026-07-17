@@ -68,11 +68,11 @@ CIMGUI_API void   c_iam_trigger_shake(ImGuiID id) { iam_trigger_shake(id); }
 CIMGUI_API float  c_iam_eval_preset(int type, float t) { return iam_eval_preset(type, t); }
 
 // Tween API - smoothly interpolate values over time
-CIMGUI_API float  c_iam_tween_float(ImGuiID id, ImGuiID channel_id, float target, float dur, iam_ease_desc* ez, int policy, float dt) { return iam_tween_float(id, channel_id, target, dur, *ez, policy, dt); }
-CIMGUI_API void   c_iam_tween_vec2(ImVec2* pOut, ImGuiID id, ImGuiID channel_id, ImVec2* target, float dur, iam_ease_desc* ez, int policy, float dt) { *pOut = iam_tween_vec2(id, channel_id, *target, dur, *ez, policy, dt); }
-CIMGUI_API void   c_iam_tween_vec4(ImVec4* pOut, ImGuiID id, ImGuiID channel_id, ImVec4* target, float dur, iam_ease_desc* ez, int policy, float dt) { *pOut = iam_tween_vec4(id, channel_id, *target, dur, *ez, policy, dt); }
-CIMGUI_API int    c_iam_tween_int(ImGuiID id, ImGuiID channel_id, int target, float dur, iam_ease_desc* ez, int policy, float dt) { return iam_tween_int(id, channel_id, target, dur, *ez, policy, dt); }
-CIMGUI_API void   c_iam_tween_color(ImVec4* pOut, ImGuiID id, ImGuiID channel_id, ImVec4* target_srgb, float dur, iam_ease_desc* ez, int policy, int color_space, float dt) { *pOut = iam_tween_color(id, channel_id, *target_srgb, dur, *ez, policy, color_space, dt); }
+CIMGUI_API float  c_iam_tween_float(ImGuiID id, ImGuiID channel_id, float target, float dur, iam_ease_desc* ez, int policy, float dt, float init_value) { return iam_tween_float(id, channel_id, target, dur, *ez, policy, dt, init_value); }
+CIMGUI_API void   c_iam_tween_vec2(ImVec2* pOut, ImGuiID id, ImGuiID channel_id, ImVec2* target, float dur, iam_ease_desc* ez, int policy, float dt, ImVec2* init_value) { *pOut = iam_tween_vec2(id, channel_id, *target, dur, *ez, policy, dt, init_value ? *init_value : ImVec2(0, 0); }
+CIMGUI_API void   c_iam_tween_vec4(ImVec4* pOut, ImGuiID id, ImGuiID channel_id, ImVec4* target, float dur, iam_ease_desc* ez, int policy, float dt, ImVec4* init_value) { *pOut = iam_tween_vec4(id, channel_id, *target, dur, *ez, policy, dt, init_value ? *init_value : ImVec4(0, 0, 0, 0); }
+CIMGUI_API int    c_iam_tween_int(ImGuiID id, ImGuiID channel_id, int target, float dur, iam_ease_desc* ez, int policy, float dt, int init_value) { return iam_tween_int(id, channel_id, target, dur, *ez, policy, dt, init_value); }
+CIMGUI_API void   c_iam_tween_color(ImVec4* pOut, ImGuiID id, ImGuiID channel_id, ImVec4* target_srgb, float dur, iam_ease_desc* ez, int policy, int color_space, float dt, ImVec4* init_value) { *pOut = iam_tween_color(id, channel_id, *target_srgb, dur, *ez, policy, color_space, dt, init_value ? *init_value : ImVec4(1, 1, 1, 1); }
 
 // Resize-friendly helpers
 CIMGUI_API void   c_iam_anchor_size(ImVec2* pOut, int space) { *pOut = iam_anchor_size(space); }

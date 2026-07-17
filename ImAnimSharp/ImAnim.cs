@@ -445,46 +445,89 @@ public static unsafe class ImAnim
     /// <summary>
     /// Animate a float value.
     /// </summary>
-    public static float TweenFloat(uint id, uint channelId, float target, float dur, ImAnimEaseDesc ez, ImAnimPolicy policy, float dt)
+    /// <param name="id">Owner ID - typically <c>ImGui::GetID("widget")</c></param>
+    /// <param name="channelId">Property ID - e.g., <c>ImHashStr("alpha")</c></param>
+    /// <param name="target">Target value to animate towards</param>
+    /// <param name="dur">Animation duration in seconds</param>
+    /// <param name="ez">Easing function</param>
+    /// <param name="policy">How to handle target changes mid-animation</param>
+    /// <param name="dt">Delta time, usually <c>ImGui::GetIO().DeltaTime</c></param>
+    /// <param name="initValue">Initial value when channel is first created (optional)</param>
+    public static float TweenFloat(uint id, uint channelId, float target, float dur, ImAnimEaseDesc ez, ImAnimPolicy policy, float dt, float initValue = 0f)
     {
-        return ImAnimNative.TweenFloat(id, channelId, target, dur, &ez, policy, dt);
+        return ImAnimNative.TweenFloat(id, channelId, target, dur, &ez, policy, dt, initValue);
     }
 
     /// <summary>
     /// Animate a 2D vector.
     /// </summary>
-    public static Vector2 TweenVec2(uint id, uint channelId, Vector2 target, float dur, ImAnimEaseDesc ez, ImAnimPolicy policy, float dt)
+    /// <param name="id">Owner ID - typically <c>ImGui::GetID("widget")</c></param>
+    /// <param name="channelId">Property ID - e.g., <c>ImHashStr("alpha")</c></param>
+    /// <param name="target">Target value to animate towards</param>
+    /// <param name="dur">Animation duration in seconds</param>
+    /// <param name="ez">Easing function</param>
+    /// <param name="policy">How to handle target changes mid-animation</param>
+    /// <param name="dt">Delta time, usually <c>ImGui::GetIO().DeltaTime</c></param>
+    /// <param name="initValue">Initial value when channel is first created (optional)</param>
+    public static Vector2 TweenVec2(uint id, uint channelId, Vector2 target, float dur, ImAnimEaseDesc ez, ImAnimPolicy policy, float dt, Vector2? initValue = null)
     {
         Vector2 ret = default;
-        ImAnimNative.TweenVec2(&ret, id, channelId, &target, dur, &ez, policy, dt);
+        Vector2 init_value = initValue ?? Vector2.Zero;
+        ImAnimNative.TweenVec2(&ret, id, channelId, &target, dur, &ez, policy, dt, &init_value);
         return ret;
     }
 
     /// <summary>
     /// Animate a 4D vector.
     /// </summary>
-    public static Vector4 TweenVec4(uint id, uint channelId, Vector4 target, float dur, ImAnimEaseDesc ez, ImAnimPolicy policy, float dt)
+    /// <param name="id">Owner ID - typically <c>ImGui::GetID("widget")</c></param>
+    /// <param name="channelId">Property ID - e.g., <c>ImHashStr("alpha")</c></param>
+    /// <param name="target">Target value to animate towards</param>
+    /// <param name="dur">Animation duration in seconds</param>
+    /// <param name="ez">Easing function</param>
+    /// <param name="policy">How to handle target changes mid-animation</param>
+    /// <param name="dt">Delta time, usually <c>ImGui::GetIO().DeltaTime</c></param>
+    /// <param name="initValue">Initial value when channel is first created (optional)</param>
+    public static Vector4 TweenVec4(uint id, uint channelId, Vector4 target, float dur, ImAnimEaseDesc ez, ImAnimPolicy policy, float dt, Vector4? initValue = null)
     {
         Vector4 ret = default;
-        ImAnimNative.TweenVec4(&ret, id, channelId, &target, dur, &ez, policy, dt);
+        Vector4 init_value = initValue ?? Vector4.Zero;
+        ImAnimNative.TweenVec4(&ret, id, channelId, &target, dur, &ez, policy, dt, &init_value);
         return ret;
     }
 
     /// <summary>
     /// Animate an integer value.
     /// </summary>
-    public static int TweenInt(uint id, uint channelId, int target, float dur, ImAnimEaseDesc ez, ImAnimPolicy policy, float dt)
+    /// <param name="id">Owner ID - typically <c>ImGui::GetID("widget")</c></param>
+    /// <param name="channelId">Property ID - e.g., <c>ImHashStr("alpha")</c></param>
+    /// <param name="target">Target value to animate towards</param>
+    /// <param name="dur">Animation duration in seconds</param>
+    /// <param name="ez">Easing function</param>
+    /// <param name="policy">How to handle target changes mid-animation</param>
+    /// <param name="dt">Delta time, usually <c>ImGui::GetIO().DeltaTime</c></param>
+    /// <param name="initValue">Initial value when channel is first created (optional)</param>
+    public static int TweenInt(uint id, uint channelId, int target, float dur, ImAnimEaseDesc ez, ImAnimPolicy policy, float dt, int initValue = 0)
     {
-        return ImAnimNative.TweenInt(id, channelId, target, dur, &ez, policy, dt);
+        return ImAnimNative.TweenInt(id, channelId, target, dur, &ez, policy, dt, initValue);
     }
 
     /// <summary>
     /// Animate a color in specified color space.
     /// </summary>
-    public static Vector4 TweenColor(uint id, uint channelId, Vector4 targetSrgb, float dur, ImAnimEaseDesc ez, ImAnimPolicy policy, ImAnimColorSpace colorSpace, float dt)
+    /// <param name="id">Owner ID - typically <c>ImGui::GetID("widget")</c></param>
+    /// <param name="channelId">Property ID - e.g., <c>ImHashStr("alpha")</c></param>
+    /// <param name="target">Target value to animate towards</param>
+    /// <param name="dur">Animation duration in seconds</param>
+    /// <param name="ez">Easing function</param>
+    /// <param name="policy">How to handle target changes mid-animation</param>
+    /// <param name="dt">Delta time, usually <c>ImGui::GetIO().DeltaTime</c></param>
+    /// <param name="initValue">Initial value when channel is first created (optional)</param>
+    public static Vector4 TweenColor(uint id, uint channelId, Vector4 targetSrgb, float dur, ImAnimEaseDesc ez, ImAnimPolicy policy, ImAnimColorSpace colorSpace, float dt, Vector4? initValue = null)
     {
         Vector4 ret = default;
-        ImAnimNative.TweenColor(&ret, id, channelId, &targetSrgb, dur, &ez, policy, colorSpace, dt);
+        Vector4 init_value = initValue ?? Vector4.Zero;
+        ImAnimNative.TweenColor(&ret, id, channelId, &targetSrgb, dur, &ez, policy, colorSpace, dt, &init_value);
         return ret;
     }
 

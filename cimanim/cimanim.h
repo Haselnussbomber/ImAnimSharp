@@ -74,11 +74,11 @@ CIMGUI_API void   c_iam_trigger_shake(ImGuiID id);
 CIMGUI_API float  c_iam_eval_preset(int type, float t);
 
 // Tween API - smoothly interpolate values over time
-CIMGUI_API float  c_iam_tween_float(ImGuiID id, ImGuiID channel_id, float target, float dur, iam_ease_desc* ez, int policy, float dt);
-CIMGUI_API void   c_iam_tween_vec2(ImVec2* pOut, ImGuiID id, ImGuiID channel_id, ImVec2* target, float dur, iam_ease_desc* ez, int policy, float dt);
-CIMGUI_API void   c_iam_tween_vec4(ImVec4* pOut, ImGuiID id, ImGuiID channel_id, ImVec4* target, float dur, iam_ease_desc* ez, int policy, float dt);
-CIMGUI_API int    c_iam_tween_int(ImGuiID id, ImGuiID channel_id, int target, float dur, iam_ease_desc* ez, int policy, float dt);
-CIMGUI_API void   c_iam_tween_color(ImVec4* pOut, ImGuiID id, ImGuiID channel_id, ImVec4* target_srgb, float dur, iam_ease_desc* ez, int policy, int color_space, float dt);
+CIMGUI_API float  c_iam_tween_float(ImGuiID id, ImGuiID channel_id, float target, float dur, iam_ease_desc* ez, int policy, float dt, float init_value);
+CIMGUI_API void   c_iam_tween_vec2(ImVec2* pOut, ImGuiID id, ImGuiID channel_id, ImVec2* target, float dur, iam_ease_desc* ez, int policy, float dt, ImVec2* init_value);
+CIMGUI_API void   c_iam_tween_vec4(ImVec4* pOut, ImGuiID id, ImGuiID channel_id, ImVec4* target, float dur, iam_ease_desc* ez, int policy, float dt, ImVec4* init_value);
+CIMGUI_API int    c_iam_tween_int(ImGuiID id, ImGuiID channel_id, int target, float dur, iam_ease_desc* ez, int policy, float dt, int init_value);
+CIMGUI_API void   c_iam_tween_color(ImVec4* pOut, ImGuiID id, ImGuiID channel_id, ImVec4* target_srgb, float dur, iam_ease_desc* ez, int policy, int color_space, float dt, ImVec4* init_value);
 
 // Resize-friendly helpers
 CIMGUI_API void   c_iam_anchor_size(ImVec2* pOut, int space);

@@ -166,19 +166,19 @@ public static unsafe partial class ImAnimNative
     // Tween API - smoothly interpolate values over time
 
     [LibraryImport(LibName, EntryPoint = "c_iam_tween_float")]
-    public static partial float TweenFloat(uint id, uint channelId, float target, float dur, ImAnimEaseDesc* ez, ImAnimPolicy policy, float dt);
+    public static partial float TweenFloat(uint id, uint channelId, float target, float dur, ImAnimEaseDesc* ez, ImAnimPolicy policy, float dt, float initValue = 0f);
 
     [LibraryImport(LibName, EntryPoint = "c_iam_tween_vec2")]
-    public static partial void TweenVec2(Vector2* pOut, uint id, uint channelId, Vector2* target, float dur, ImAnimEaseDesc* ez, ImAnimPolicy policy, float dt);
+    public static partial void TweenVec2(Vector2* pOut, uint id, uint channelId, Vector2* target, float dur, ImAnimEaseDesc* ez, ImAnimPolicy policy, float dt, Vector2* initValue = null);
 
     [LibraryImport(LibName, EntryPoint = "c_iam_tween_vec4")]
-    public static partial void TweenVec4(Vector4* pOut, uint id, uint channelId, Vector4* target, float dur, ImAnimEaseDesc* ez, ImAnimPolicy policy, float dt);
+    public static partial void TweenVec4(Vector4* pOut, uint id, uint channelId, Vector4* target, float dur, ImAnimEaseDesc* ez, ImAnimPolicy policy, float dt, Vector4* initValue = null);
 
     [LibraryImport(LibName, EntryPoint = "c_iam_tween_int")]
-    public static partial int TweenInt(uint id, uint channelId, int target, float dur, ImAnimEaseDesc* ez, ImAnimPolicy policy, float dt);
+    public static partial int TweenInt(uint id, uint channelId, int target, float dur, ImAnimEaseDesc* ez, ImAnimPolicy policy, float dt, int initValue = 0);
 
     [LibraryImport(LibName, EntryPoint = "c_iam_tween_color")]
-    public static partial void TweenColor(Vector4* pOut, uint id, uint channelId, Vector4* targetSrgb, float dur, ImAnimEaseDesc* ez, ImAnimPolicy policy, ImAnimColorSpace colorSpace, float dt);
+    public static partial void TweenColor(Vector4* pOut, uint id, uint channelId, Vector4* targetSrgb, float dur, ImAnimEaseDesc* ez, ImAnimPolicy policy, ImAnimColorSpace colorSpace, float dt, Vector4* initValue);
 
     // Resize-friendly helpers
 
