@@ -299,6 +299,10 @@ CIMGUI_API void   c_iam_tween_gradient(iam_gradient* pOut, ImGuiID id, ImGuiID c
 // Transform Interpolation - animate 2D transforms
 // ----------------------------------------------------
 
+CIMGUI_API void   c_iam_transform_apply(ImVec2* pOut, iam_transform* transform, ImVec2* point);
+CIMGUI_API void   c_iam_transform_inverse(iam_transform* pOut, iam_transform* transform);
+CIMGUI_API void   c_iam_transform_multiply(iam_transform* pOut, iam_transform* transform, iam_transform* other);
+
 // Blend between two transforms with rotation interpolation
 CIMGUI_API void   c_iam_transform_lerp(iam_transform* pOut, iam_transform* a, iam_transform* b, float t, int rotation_mode);
 

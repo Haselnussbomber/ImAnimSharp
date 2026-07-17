@@ -7,7 +7,7 @@ using Dalamud.Bindings.ImGui;
 
 namespace ImAnimSharp;
 
-// TODO: ImAnimTransform, ImAnimGradient functions
+// TODO: ImAnimGradient functions
 // TODO: iam_path https://github.com/soufianekhiat/ImAnim/blob/0e28f285/docs/path-morphing.md
 // TODO: Helper functions for variations https://github.com/soufianekhiat/ImAnim/blob/0e28f285/docs/variations.md
 

@@ -538,6 +538,15 @@ public static unsafe partial class ImAnimNative
     // Transform Interpolation - animate 2D transforms
     // ----------------------------------------------------
 
+    [LibraryImport(LibName, EntryPoint = "c_iam_transform_apply")]
+    public static partial void TransformApply(Vector2* pOut, ImAnimTransform* transform, Vector2* point);
+
+    [LibraryImport(LibName, EntryPoint = "c_iam_transform_inverse")]
+    public static partial void TransformInverse(ImAnimTransform* pOut, ImAnimTransform* transform);
+
+    [LibraryImport(LibName, EntryPoint = "c_iam_transform_multiply")]
+    public static partial void TransformMultiply(ImAnimTransform* pOut, ImAnimTransform* transform, ImAnimTransform* other);
+
     // Blend between two transforms with rotation interpolation
     [LibraryImport(LibName, EntryPoint = "c_iam_transform_lerp")]
     public static partial void TransformLerp(ImAnimTransform* pOut, ImAnimTransform* a, ImAnimTransform* b, float t, ImAnimRotationMode rotationMode = ImAnimRotationMode.Shortest);
