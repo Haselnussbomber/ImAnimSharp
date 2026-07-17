@@ -23,9 +23,50 @@ public static unsafe class ImAnim
     public delegate Vector2 VariationVec2Fn(int index, void* userData); // iam_variation_vec2_fn
     public delegate Vector4 VariationVec4Fn(int index, void* userData); // iam_variation_vec4_fn
 
+    private static int _gcCounter;
+
     // ----------------------------------------------------
     // Public API declarations
     // ----------------------------------------------------
+
+    public static void Initialize()
+    {
+        SetImGuiContext(ImGui.GetCurrentContext());
+
+        delegate*<nuint, void*, void*> pAllocFunc = null;
+        delegate*<void*, void*, void> pFreeFunc = null;
+        void* pUserData = null;
+
+        ImGui.GetAllocatorFunctions(&pAllocFunc, &pFreeFunc, &pUserData);
+        SetImGuiAllocatorFunctions(pAllocFunc, pFreeFunc, pUserData);
+    }
+
+    public static void Shutdown()
+    {
+        ClipShutdown();
+        PoolClear();
+        SetImGuiContext(null);
+        SetImGuiAllocatorFunctions(null, null);
+    }
+
+    public static void BeginFrame()
+    {
+        ProfilerBeginFrame();
+        UpdateBeginFrame();
+        ClipUpdate(ImGui.GetIO().DeltaTime);
+    }
+
+    public static void EndFrame()
+    {
+        ProfilerEndFrame();
+
+        if (++_gcCounter >= 300)
+        {
+            _gcCounter = 0;
+            Gc(600);
+            ClipGc(600);
+        }
+    }
 
     public static void SetImGuiContext(ImGuiContext* context)
     {
