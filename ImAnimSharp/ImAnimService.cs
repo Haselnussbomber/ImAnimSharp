@@ -46,6 +46,7 @@ public unsafe class ImAnimService : IDisposable
     {
         _pluginInterface.UiBuilder.Draw -= OnDraw;
         ImAnim.ClipShutdown();
+        ImAnim.PoolClear();
         ImAnim.SetImGuiContext(null);
         ImAnim.SetImGuiAllocatorFunctions(null, null);
     }
