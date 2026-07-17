@@ -1,4 +1,6 @@
 using System;
+using System.Reflection;
+using System.Runtime.InteropServices;
 using Dalamud.Bindings.ImGui;
 using Dalamud.Plugin;
 
@@ -7,6 +9,7 @@ namespace ImAnimSharp;
 public unsafe class ImAnimService : IDisposable
 {
     private readonly IDalamudPluginInterface _pluginInterface;
+    private nint _nativeHandle;
     private int _gcCounter;
 
     /// <summary>
@@ -15,6 +18,8 @@ public unsafe class ImAnimService : IDisposable
     public ImAnimService(IDalamudPluginInterface pluginInterface)
     {
         _pluginInterface = pluginInterface;
+
+        NativeLibrary.SetDllImportResolver(typeof(ImAnimNative).Assembly, ResolveLibrary);
 
         ImAnim.SetImGuiContext(ImGui.GetCurrentContext());
 
@@ -26,6 +31,18 @@ public unsafe class ImAnimService : IDisposable
         ImAnim.SetImGuiAllocatorFunctions(pAllocFunc, pFreeFunc, pUserData);
 
         _pluginInterface.UiBuilder.Draw += OnDraw;
+    }
+
+    private nint ResolveLibrary(string libraryName, Assembly assembly, DllImportSearchPath? searchPath)
+    {
+        if (assembly == typeof(ImAnimNative).Assembly && libraryName == "cimanim")
+        {
+            return _nativeHandle != 0
+                ? _nativeHandle
+                : _nativeHandle = NativeLibrary.Load(libraryName, assembly, searchPath);
+        }
+
+        return 0;
     }
 
     private void OnDraw()
@@ -45,9 +62,17 @@ public unsafe class ImAnimService : IDisposable
     public void Dispose()
     {
         _pluginInterface.UiBuilder.Draw -= OnDraw;
+
         ImAnim.ClipShutdown();
         ImAnim.PoolClear();
+
         ImAnim.SetImGuiContext(null);
         ImAnim.SetImGuiAllocatorFunctions(null, null);
+
+        if (_nativeHandle != 0)
+        {
+            NativeLibrary.Free(_nativeHandle);
+            _nativeHandle = 0;
+        }
     }
 }
