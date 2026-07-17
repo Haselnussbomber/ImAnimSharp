@@ -1,5 +1,8 @@
 namespace ImAnimSharp;
 
+/// <summary>
+/// Rotation interpolation modes
+/// </summary>
 public enum ImAnimRotationMode
 {
     /// <summary>

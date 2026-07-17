@@ -8,6 +8,9 @@ namespace ImAnimSharp;
 [StructLayout(LayoutKind.Sequential)]
 public struct ImAnimNoiseOpts
 {
+    /// <summary>
+    /// Noise algorithm.
+    /// </summary>
     public ImAnimNoiseType Type;
 
     /// <summary>
@@ -29,4 +32,13 @@ public struct ImAnimNoiseOpts
     /// Random seed for noise generation
     /// </summary>
     public int Seed;
+
+    public static ImAnimNoiseOpts Default() => new()
+    {
+        Type = ImAnimNoiseType.Perlin,
+        Octaves = 1,
+        Persistence = 0.5f,
+        Lacunarity = 2.0f,
+        Seed = 0,
+    };
 }

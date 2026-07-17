@@ -1,19 +1,22 @@
 namespace ImAnimSharp;
 
+/// <summary>
+/// Control how animations behave when the target changes mid-animation.
+/// </summary>
 public enum ImAnimPolicy
 {
     /// <summary>
-    /// smooth into new target
+    /// Smoothly blend to new target from current position
     /// </summary>
     Crossfade,
 
     /// <summary>
-    /// snap to target
+    /// Snap immediately to new target
     /// </summary>
     Cut,
 
     /// <summary>
-    /// queue one pending target
+    /// Queue new target, play after current animation completes
     /// </summary>
     Queue,
 }

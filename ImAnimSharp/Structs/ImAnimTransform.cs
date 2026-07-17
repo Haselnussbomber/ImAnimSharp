@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 namespace ImAnimSharp;
 
 /// <summary>
-/// 2D transform (position, rotation, scale)
+/// 2D transform (position, rotation, scale) (<see href="https://github.com/soufianekhiat/ImAnim/blob/0e28f285/docs/transforms.md">Docs</see>)
 /// </summary>
 [StructLayout(LayoutKind.Sequential)]
 public struct ImAnimTransform
@@ -23,4 +23,14 @@ public struct ImAnimTransform
     /// Rotation in radians
     /// </summary>
     public float Rotation;
+
+    public static ImAnimTransform Identity() => new()
+    {
+        Position = Vector2.Zero,
+        Scale = Vector2.One,
+        Rotation = 0,
+    };
+
+    // TODO: functions apply, inverse, lerp
+    // TODO: * operator
 }

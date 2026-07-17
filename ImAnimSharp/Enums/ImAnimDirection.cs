@@ -1,5 +1,8 @@
 namespace ImAnimSharp;
 
+/// <summary>
+/// Direction for looping animations
+/// </summary>
 public enum ImAnimDirection
 {
     /// <summary>

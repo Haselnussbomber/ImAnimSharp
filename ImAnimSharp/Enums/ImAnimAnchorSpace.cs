@@ -1,24 +1,27 @@
 namespace ImAnimSharp;
 
+/// <summary>
+/// Anchor Space (<see href="https://github.com/soufianekhiat/ImAnim/blob/0e28f28/docs/anchors.md">Docs</see>)
+/// </summary>
 public enum ImAnimAnchorSpace
 {
     /// <summary>
-    /// ImGui::GetContentRegionAvail()
+    /// Reference size: <c>ImGui::GetContentRegionAvail()</c>
     /// </summary>
     WindowContent,
 
     /// <summary>
-    /// ImGui::GetWindowSize()
+    /// Reference size: <c>ImGui::GetWindowSize()</c>
     /// </summary>
     Window,
 
     /// <summary>
-    /// ImGui::GetWindowViewport()->Size
+    /// Reference size: <c>ImGui::GetWindowViewport()->Size</c>
     /// </summary>
     Viewport,
 
     /// <summary>
-    /// ImGui::GetItemRectSize()
+    /// Reference size: <c>ImGui::GetItemRectSize()</c>
     /// </summary>
     LastItem,
 }

@@ -7,6 +7,10 @@ using Dalamud.Bindings.ImGui;
 
 namespace ImAnimSharp;
 
+// TODO: ImAnimTransform, ImAnimGradient functions
+// TODO: iam_path https://github.com/soufianekhiat/ImAnim/blob/0e28f285/docs/path-morphing.md
+// TODO: Helper functions for variations https://github.com/soufianekhiat/ImAnim/blob/0e28f285/docs/variations.md
+
 public static unsafe class ImAnim
 {
     public delegate void ClipCallback(uint instId, void* userData); // iam_clip_callback
@@ -67,7 +71,7 @@ public static unsafe class ImAnim
     }
 
     /// <summary>
-    /// Manually cleanup pools.
+    /// Clear all pools immediately (useful for scene transitions, level resets).
     /// </summary>
     public static void PoolClear()
     {
@@ -301,6 +305,13 @@ public static unsafe class ImAnim
     /// <summary>
     /// 2D oscillation.
     /// </summary>
+    /// <param name="id"></param>
+    /// <param name="amplitude">Amplitude per axis</param>
+    /// <param name="frequency">Frequency per axis</param>
+    /// <param name="waveType"></param>
+    /// <param name="phase">Phase per axis</param>
+    /// <param name="dt"></param>
+    /// <returns></returns>
     public static Vector2 OscillateVec2(uint id, Vector2 amplitude, Vector2 frequency, ImAnimWaveType waveType, Vector2 phase, float dt)
     {
         Vector2 ret = default;
@@ -311,6 +322,13 @@ public static unsafe class ImAnim
     /// <summary>
     /// 4D oscillation.
     /// </summary>
+    /// <param name="id"></param>
+    /// <param name="amplitude">Amplitudes</param>
+    /// <param name="frequency">Frequencies</param>
+    /// <param name="waveType"></param>
+    /// <param name="phase">Phases</param>
+    /// <param name="dt"></param>
+    /// <returns></returns>
     public static Vector4 OscillateVec4(uint id, Vector4 amplitude, Vector4 frequency, ImAnimWaveType waveType, Vector4 phase, float dt)
     {
         Vector4 ret = default;
@@ -321,6 +339,15 @@ public static unsafe class ImAnim
     /// <summary>
     /// Color oscillation in specified color space.
     /// </summary>
+    /// <param name="id"></param>
+    /// <param name="baseColor">Base color (sRGB)</param>
+    /// <param name="amplitude">Amplitude (affects V in HSV)</param>
+    /// <param name="frequency">Frequency</param>
+    /// <param name="waveType"></param>
+    /// <param name="phase">Phase</param>
+    /// <param name="colorSpace">Color space</param>
+    /// <param name="dt"></param>
+    /// <returns></returns>
     public static Vector4 OscillateColor(uint id, Vector4 baseColor, Vector4 amplitude, float frequency, ImAnimWaveType waveType, float phase, ImAnimColorSpace colorSpace, float dt)
     {
         Vector4 ret = default;
@@ -331,8 +358,14 @@ public static unsafe class ImAnim
     // Shake/Wiggle - procedural noise animations
 
     /// <summary>
-    /// Decaying random shake. Returns offset that decays to 0.
+    /// Decaying random shake.
     /// </summary>
+    /// <param name="id"></param>
+    /// <param name="intensity">Intensity (max displacement)</param>
+    /// <param name="frequency">Frequency (oscillations per second)</param>
+    /// <param name="decayTime">Decay time (seconds)</param>
+    /// <param name="dt"></param>
+    /// <returns>Offset that decays to 0.</returns>
     public static float Shake(uint id, float intensity, float frequency, float decayTime, float dt)
     {
         return ImAnimNative.Shake(id, intensity, frequency, decayTime, dt);
@@ -341,6 +374,12 @@ public static unsafe class ImAnim
     /// <summary>
     /// Decaying random shake for integers.
     /// </summary>
+    /// <param name="id"></param>
+    /// <param name="intensity">Intensity (max displacement)</param>
+    /// <param name="frequency">Frequency (oscillations per second)</param>
+    /// <param name="decayTime">Decay time (seconds)</param>
+    /// <param name="dt"></param>
+    /// <returns>Offset that decays to 0.</returns>
     public static int ShakeInt(uint id, int intensity, float frequency, float decayTime, float dt)
     {
         return ImAnimNative.ShakeInt(id, intensity, frequency, decayTime, dt);
@@ -349,6 +388,12 @@ public static unsafe class ImAnim
     /// <summary>
     /// 2D decaying shake.
     /// </summary>
+    /// <param name="id"></param>
+    /// <param name="intensity">Different intensity per axis</param>
+    /// <param name="frequency">Frequency</param>
+    /// <param name="decayTime">Decay time</param>
+    /// <param name="dt"></param>
+    /// <returns>Offset that decays to 0.</returns>
     public static Vector2 ShakeVec2(uint id, Vector2 intensity, float frequency, float decayTime, float dt)
     {
         Vector2 ret = default;
@@ -359,6 +404,12 @@ public static unsafe class ImAnim
     /// <summary>
     /// 4D decaying shake.
     /// </summary>
+    /// <param name="id"></param>
+    /// <param name="intensity">Intensity per component</param>
+    /// <param name="frequency">Frequency</param>
+    /// <param name="decayTime">Decay time</param>
+    /// <param name="dt"></param>
+    /// <returns>Offset that decays to 0.</returns>
     public static Vector4 ShakeVec4(uint id, Vector4 intensity, float frequency, float decayTime, float dt)
     {
         Vector4 ret = default;
@@ -369,6 +420,14 @@ public static unsafe class ImAnim
     /// <summary>
     /// Color shake in specified color space.
     /// </summary>
+    /// <param name="id"></param>
+    /// <param name="baseColor">Base color</param>
+    /// <param name="intensity">Intensity</param>
+    /// <param name="frequency">Frequency</param>
+    /// <param name="decayTime">Decay time</param>
+    /// <param name="colorSpace">Color space</param>
+    /// <param name="dt"></param>
+    /// <returns>Offset that decays to 0.</returns>
     public static Vector4 ShakeColor(uint id, Vector4 baseColor, Vector4 intensity, float frequency, float decayTime, ImAnimColorSpace colorSpace, float dt)
     {
         Vector4 ret = default;
@@ -379,6 +438,10 @@ public static unsafe class ImAnim
     /// <summary>
     /// Continuous smooth random movement.
     /// </summary>
+    /// <param name="id"></param>
+    /// <param name="amplitude">Amplitude</param>
+    /// <param name="frequency">Frequency</param>
+    /// <param name="dt"></param>
     public static float Wiggle(uint id, float amplitude, float frequency, float dt)
     {
         return ImAnimNative.Wiggle(id, amplitude, frequency, dt);
@@ -387,6 +450,10 @@ public static unsafe class ImAnim
     /// <summary>
     /// Continuous smooth random movement for integers.
     /// </summary>
+    /// <param name="id"></param>
+    /// <param name="amplitude">Amplitude</param>
+    /// <param name="frequency">Frequency</param>
+    /// <param name="dt"></param>
     public static int WiggleInt(uint id, int amplitude, float frequency, float dt)
     {
         return ImAnimNative.WiggleInt(id, amplitude, frequency, dt);
@@ -395,6 +462,10 @@ public static unsafe class ImAnim
     /// <summary>
     /// 2D continuous wiggle.
     /// </summary>
+    /// <param name="id"></param>
+    /// <param name="amplitude">Amplitude</param>
+    /// <param name="frequency">Frequency</param>
+    /// <param name="dt"></param>
     public static Vector2 WiggleVec2(uint id, Vector2 amplitude, float frequency, float dt)
     {
         Vector2 ret = default;
@@ -405,6 +476,10 @@ public static unsafe class ImAnim
     /// <summary>
     /// 4D continuous wiggle.
     /// </summary>
+    /// <param name="id"></param>
+    /// <param name="amplitude">Amplitude</param>
+    /// <param name="frequency">Frequency</param>
+    /// <param name="dt"></param>
     public static Vector4 WiggleVec4(uint id, Vector4 amplitude, float frequency, float dt)
     {
         Vector4 ret = default;
@@ -415,6 +490,12 @@ public static unsafe class ImAnim
     /// <summary>
     /// Color wiggle in specified color space.
     /// </summary>
+    /// <param name="id"></param>
+    /// <param name="baseColor">Base color</param>
+    /// <param name="amplitude">Amplitude</param>
+    /// <param name="frequency">Frequency</param>
+    /// <param name="colorSpace">Color space</param>
+    /// <param name="dt"></param>
     public static Vector4 WiggleColor(uint id, Vector4 baseColor, Vector4 amplitude, float frequency, ImAnimColorSpace colorSpace, float dt)
     {
         Vector4 ret = default;

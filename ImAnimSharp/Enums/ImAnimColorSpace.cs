@@ -1,29 +1,32 @@
 namespace ImAnimSharp;
 
+/// <summary>
+/// Color Space
+/// </summary>
 public enum ImAnimColorSpace
 {
     /// <summary>
-    /// blend in sRGB (not physically linear)
+    /// Direct sRGB blend (not physically linear). Best for simple blends.
     /// </summary>
     Srgb,
 
     /// <summary>
-    /// sRGB<->linear, blend in linear, back to sRGB
+    /// Linear RGB blend. Best for physical accuracy.
     /// </summary>
     SrgbLinear,
 
     /// <summary>
-    /// blend H/S/V (hue shortest arc), keep A linear
+    /// HSV blend (shortest hue arc). Best for rainbow effects.
     /// </summary>
     Hsv,
 
     /// <summary>
-    /// sRGB<->OKLAB, blend in OKLAB, back to sRGB
+    /// OKLAB perceptual blend. Best for UI transitions.
     /// </summary>
     Oklab,
 
     /// <summary>
-    /// sRGB<->OKLCH (cylindrical OKLAB), blend in OKLCH, back to sRGB
+    /// OKLCH cylindrical blend. Best for vibrant gradients.
     /// </summary>
     Oklch,
 }

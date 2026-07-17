@@ -6,7 +6,7 @@ using Dalamud.Bindings.ImGui;
 namespace ImAnimSharp;
 
 /// <summary>
-/// Text path options
+/// Text path options (<see href="https://github.com/soufianekhiat/ImAnim/blob/0e28f285/docs/text-along-paths.md">Docs</see>)
 /// </summary>
 [StructLayout(LayoutKind.Sequential)]
 public struct ImAnimTextPathOpts

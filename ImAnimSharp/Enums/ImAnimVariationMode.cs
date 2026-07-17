@@ -1,5 +1,8 @@
 namespace ImAnimSharp;
 
+/// <summary>
+/// Variation modes for repeat animations (<see href="https://github.com/soufianekhiat/ImAnim/blob/0e28f285/docs/variations.md">Docs</see>)
+/// </summary>
 public enum ImAnimVariationMode
 {
     /// <summary>

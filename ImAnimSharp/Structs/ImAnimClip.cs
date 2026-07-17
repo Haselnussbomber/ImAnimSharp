@@ -292,6 +292,9 @@ public unsafe struct ImAnimClip
         return this;
     }
 
+    /// <param name="count">Number of elements in the stagger group</param>
+    /// <param name="eachDelay">Delay in seconds between each element</param>
+    /// <param name="fromCenterBias">Where animation starts from (-1 to 1)</param>
     public ImAnimClip SetStagger(int count, float eachDelay, float fromCenterBias)
     {
         fixed (ImAnimClip* @this = &this)

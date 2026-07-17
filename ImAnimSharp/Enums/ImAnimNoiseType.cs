@@ -3,17 +3,17 @@ namespace ImAnimSharp;
 public enum ImAnimNoiseType
 {
     /// <summary>
-    /// Classic Perlin noise
+    /// Classic Perlin noise, smooth gradients
     /// </summary>
     Perlin,
 
     /// <summary>
-    /// Simplex noise (faster, fewer artifacts)
+    /// Faster, fewer artifacts than Perlin
     /// </summary>
     Simplex,
 
     /// <summary>
-    /// Value noise (blocky)
+    /// Simple value noise, blocky
     /// </summary>
     Value,
 
