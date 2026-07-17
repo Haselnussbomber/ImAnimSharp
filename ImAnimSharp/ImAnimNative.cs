@@ -849,6 +849,10 @@ public static unsafe partial class ImAnimNative
     public static partial byte GetBlendedInt(uint instanceId, uint channel, int* outVal);
 
     // Persistence (optional)
+
+    [LibraryImport(LibName, EntryPoint = "c_iam_set_config_directory")]
+    public static partial void SetConfigDirectory(byte* path);
+
     [LibraryImport(LibName, EntryPoint = "c_iam_clip_save")]
     public static partial ImAnimResult ClipSave(uint clipId, byte* path);
 

@@ -30,6 +30,8 @@ public unsafe class ImAnimService : IDisposable
         ImGui.GetAllocatorFunctions(&pAllocFunc, &pFreeFunc, &pUserData);
         ImAnim.SetImGuiAllocatorFunctions(pAllocFunc, pFreeFunc, pUserData);
 
+        ImAnim.SetConfigDirectory(pluginInterface.GetPluginConfigDirectory());
+
         _pluginInterface.UiBuilder.Draw += OnDraw;
     }
 

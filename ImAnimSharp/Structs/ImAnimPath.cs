@@ -17,17 +17,17 @@ public unsafe struct ImAnimPath(uint pathId)
     /// <summary>
     /// Start building a path at position.
     /// </summary>
-    public static ImAnimPath Begin(ImU8String pathId, Vector2 start)
-    {
-        return ImAnim.PathBegin(ImGuiP.ImHashStr(pathId), start);
-    }
-
-    /// <summary>
-    /// Start building a path at position.
-    /// </summary>
     public static ImAnimPath Begin(uint pathId, Vector2 start)
     {
-        return ImAnim.PathBegin(pathId, start);
+        ImAnimPath ret = default;
+        ImAnimNative.PathBegin(&ret, pathId, &start);
+        return ret;
+    }
+
+    /// <inheritdoc cref="Begin(uint, Vector2)"/>
+    public static ImAnimPath Begin(ImU8String pathId, Vector2 start)
+    {
+        return Begin(pathId.GetId(), start);
     }
 
     /// <summary>

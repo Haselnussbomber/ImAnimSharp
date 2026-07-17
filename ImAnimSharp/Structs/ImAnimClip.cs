@@ -16,17 +16,15 @@ public unsafe struct ImAnimClip
     /// <summary>
     /// Start building a new clip with the given ID.
     /// </summary>
-    public static ImAnimClip Begin(ImU8String clipId)
-    {
-        return ImAnim.ClipBegin(ImGuiP.ImHashStr(clipId));
-    }
-
-    /// <summary>
-    /// Start building a new clip with the given ID.
-    /// </summary>
     public static ImAnimClip Begin(uint clipId)
     {
         return ImAnim.ClipBegin(clipId);
+    }
+
+    /// <inheritdoc cref="Begin(uint)"/>
+    public static ImAnimClip Begin(ImU8String clipId)
+    {
+        return Begin(clipId.GetId());
     }
 
     // Add keyframes for different channel types
@@ -38,11 +36,21 @@ public unsafe struct ImAnimClip
         return this;
     }
 
+    public ImAnimClip KeyFloat(ImU8String channel, float time, float value, ImAnimEaseType easeType = ImAnimEaseType.Linear)
+    {
+        return KeyFloat(channel.GetId(), time, value, easeType);
+    }
+
     public ImAnimClip KeyFloat(uint channel, float time, float value, ImAnimEaseType easeType, Vector4 bezier4)
     {
         fixed (ImAnimClip* @this = &this)
             ImAnimNative.ClipKeyFloat(@this, channel, time, value, easeType, &bezier4);
         return this;
+    }
+
+    public ImAnimClip KeyFloat(ImU8String channel, float time, float value, ImAnimEaseType easeType, Vector4 bezier4)
+    {
+        return KeyFloat(channel.GetId(), time, value, easeType, bezier4);
     }
 
     public ImAnimClip KeyVec2(uint channel, float time, Vector2 value, ImAnimEaseType easeType = ImAnimEaseType.Linear)
@@ -52,11 +60,21 @@ public unsafe struct ImAnimClip
         return this;
     }
 
+    public ImAnimClip KeyVec2(ImU8String channel, float time, Vector2 value, ImAnimEaseType easeType = ImAnimEaseType.Linear)
+    {
+        return KeyVec2(channel.GetId(), time, value, easeType);
+    }
+
     public ImAnimClip KeyVec2(uint channel, float time, Vector2 value, ImAnimEaseType easeType, Vector4 bezier4)
     {
         fixed (ImAnimClip* @this = &this)
             ImAnimNative.ClipKeyVec2(@this, channel, time, &value, easeType, &bezier4);
         return this;
+    }
+
+    public ImAnimClip KeyVec2(ImU8String channel, float time, Vector2 value, ImAnimEaseType easeType, Vector4 bezier4)
+    {
+        return KeyVec2(channel.GetId(), time, value, easeType, bezier4);
     }
 
     public ImAnimClip KeyVec4(uint channel, float time, Vector4 value, ImAnimEaseType easeType = ImAnimEaseType.Linear)
@@ -66,11 +84,21 @@ public unsafe struct ImAnimClip
         return this;
     }
 
+    public ImAnimClip KeyVec4(ImU8String channel, float time, Vector4 value, ImAnimEaseType easeType = ImAnimEaseType.Linear)
+    {
+        return KeyVec4(channel.GetId(), time, value, easeType);
+    }
+
     public ImAnimClip KeyVec4(uint channel, float time, Vector4 value, ImAnimEaseType easeType, Vector4 bezier4)
     {
         fixed (ImAnimClip* @this = &this)
             ImAnimNative.ClipKeyVec4(@this, channel, time, &value, easeType, &bezier4);
         return this;
+    }
+
+    public ImAnimClip KeyVec4(ImU8String channel, float time, Vector4 value, ImAnimEaseType easeType, Vector4 bezier4)
+    {
+        return KeyVec4(channel.GetId(), time, value, easeType, bezier4);
     }
 
     public ImAnimClip KeyInt(uint channel, float time, int value, ImAnimEaseType easeType = ImAnimEaseType.Linear)
@@ -80,6 +108,11 @@ public unsafe struct ImAnimClip
         return this;
     }
 
+    public ImAnimClip KeyInt(ImU8String channel, float time, int value, ImAnimEaseType easeType = ImAnimEaseType.Linear)
+    {
+        return KeyInt(channel.GetId(), time, value, easeType);
+    }
+
     public ImAnimClip KeyColor(uint channel, float time, Vector4 value, ImAnimColorSpace colorSpace, ImAnimEaseType easeType = ImAnimEaseType.Linear)
     {
         fixed (ImAnimClip* @this = &this)
@@ -87,11 +120,21 @@ public unsafe struct ImAnimClip
         return this;
     }
 
+    public ImAnimClip KeyColor(ImU8String channel, float time, Vector4 value, ImAnimColorSpace colorSpace, ImAnimEaseType easeType = ImAnimEaseType.Linear)
+    {
+        return KeyColor(channel.GetId(), time, value, colorSpace, easeType);
+    }
+
     public ImAnimClip KeyColor(uint channel, float time, Vector4 value, ImAnimColorSpace colorSpace, ImAnimEaseType easeType, Vector4 bezier4)
     {
         fixed (ImAnimClip* @this = &this)
             ImAnimNative.ClipKeyColor(@this, channel, time, &value, colorSpace, easeType, &bezier4);
         return this;
+    }
+
+    public ImAnimClip KeyColor(ImU8String channel, float time, Vector4 value, ImAnimColorSpace colorSpace, ImAnimEaseType easeType, Vector4 bezier4)
+    {
+        return KeyColor(channel.GetId(), time, value, colorSpace, easeType, bezier4);
     }
 
     // Keyframes with repeat variation (value changes per loop iteration)
@@ -103,11 +146,21 @@ public unsafe struct ImAnimClip
         return this;
     }
 
+    public ImAnimClip KeyFloatVar(ImU8String channel, float time, float value, ImAnimVariationFloat var, ImAnimEaseType easeType = ImAnimEaseType.Linear)
+    {
+        return KeyFloatVar(channel.GetId(), time, value, var, easeType);
+    }
+
     public ImAnimClip KeyFloatVar(uint channel, float time, float value, ImAnimVariationFloat var, ImAnimEaseType easeType, Vector4 bezier4)
     {
         fixed (ImAnimClip* @this = &this)
             ImAnimNative.ClipKeyFloatVar(@this, channel, time, value, &var, easeType, &bezier4);
         return this;
+    }
+
+    public ImAnimClip KeyFloatVar(ImU8String channel, float time, float value, ImAnimVariationFloat var, ImAnimEaseType easeType, Vector4 bezier4)
+    {
+        return KeyFloatVar(channel.GetId(), time, value, var, easeType, bezier4);
     }
 
     public ImAnimClip KeyVec2Var(uint channel, float time, Vector2 value, ImAnimVariationVec2 var, ImAnimEaseType easeType)
@@ -117,11 +170,21 @@ public unsafe struct ImAnimClip
         return this;
     }
 
+    public ImAnimClip KeyVec2Var(ImU8String channel, float time, Vector2 value, ImAnimVariationVec2 var, ImAnimEaseType easeType)
+    {
+        return KeyVec2Var(channel.GetId(), time, value, var, easeType);
+    }
+
     public ImAnimClip KeyVec2Var(uint channel, float time, Vector2 value, ImAnimVariationVec2 var, ImAnimEaseType easeType, Vector4 bezier4)
     {
         fixed (ImAnimClip* @this = &this)
             ImAnimNative.ClipKeyVec2Var(@this, channel, time, &value, &var, easeType, &bezier4);
         return this;
+    }
+
+    public ImAnimClip KeyVec2Var(ImU8String channel, float time, Vector2 value, ImAnimVariationVec2 var, ImAnimEaseType easeType, Vector4 bezier4)
+    {
+        return KeyVec2Var(channel.GetId(), time, value, var, easeType, bezier4);
     }
 
     public ImAnimClip KeyVec4Var(uint channel, float time, Vector4 value, ImAnimVariationVec4 var, ImAnimEaseType easeType = ImAnimEaseType.Linear)
@@ -131,11 +194,21 @@ public unsafe struct ImAnimClip
         return this;
     }
 
+    public ImAnimClip KeyVec4Var(ImU8String channel, float time, Vector4 value, ImAnimVariationVec4 var, ImAnimEaseType easeType = ImAnimEaseType.Linear)
+    {
+        return KeyVec4Var(channel.GetId(), time, value, var, easeType);
+    }
+
     public ImAnimClip KeyVec4Var(uint channel, float time, Vector4 value, ImAnimVariationVec4 var, ImAnimEaseType easeType, Vector4 bezier4)
     {
         fixed (ImAnimClip* @this = &this)
             ImAnimNative.ClipKeyVec4Var(@this, channel, time, &value, &var, easeType, &bezier4);
         return this;
+    }
+
+    public ImAnimClip KeyVec4Var(ImU8String channel, float time, Vector4 value, ImAnimVariationVec4 var, ImAnimEaseType easeType, Vector4 bezier4)
+    {
+        return KeyVec4Var(channel.GetId(), time, value, var, easeType, bezier4);
     }
 
     public ImAnimClip KeyIntVar(uint channel, float time, int value, ImAnimVariationInt var, ImAnimEaseType easeType = ImAnimEaseType.Linear)
@@ -145,6 +218,11 @@ public unsafe struct ImAnimClip
         return this;
     }
 
+    public ImAnimClip KeyIntVar(ImU8String channel, float time, int value, ImAnimVariationInt var, ImAnimEaseType easeType = ImAnimEaseType.Linear)
+    {
+        return KeyIntVar(channel.GetId(), time, value, var, easeType);
+    }
+
     public ImAnimClip KeyColorVar(uint channel, float time, Vector4 value, ImAnimVariationColor var, ImAnimColorSpace colorSpace, ImAnimEaseType easeType = ImAnimEaseType.Linear)
     {
         fixed (ImAnimClip* @this = &this)
@@ -152,11 +230,21 @@ public unsafe struct ImAnimClip
         return this;
     }
 
+    public ImAnimClip KeyColorVar(ImU8String channel, float time, Vector4 value, ImAnimVariationColor var, ImAnimColorSpace colorSpace, ImAnimEaseType easeType = ImAnimEaseType.Linear)
+    {
+        return KeyColorVar(channel.GetId(), time, value, var, colorSpace, easeType);
+    }
+
     public ImAnimClip KeyColorVar(uint channel, float time, Vector4 value, ImAnimVariationColor var, ImAnimColorSpace colorSpace, ImAnimEaseType easeType, Vector4 bezier4)
     {
         fixed (ImAnimClip* @this = &this)
             ImAnimNative.ClipKeyColorVar(@this, channel, time, &value, &var, colorSpace, easeType, &bezier4);
         return this;
+    }
+
+    public ImAnimClip KeyColorVar(ImU8String channel, float time, Vector4 value, ImAnimVariationColor var, ImAnimColorSpace colorSpace, ImAnimEaseType easeType, Vector4 bezier4)
+    {
+        return KeyColorVar(channel.GetId(), time, value, var, colorSpace, easeType, bezier4);
     }
 
     // Spring-based keyframe (float only)
@@ -168,6 +256,11 @@ public unsafe struct ImAnimClip
         return this;
     }
 
+    public ImAnimClip KeyFloatSpring(ImU8String channel, float time, float target, ImAnimSpringParams spring)
+    {
+        return KeyFloatSpring(channel.GetId(), time, target, spring);
+    }
+
     // Anchor-relative keyframes (values resolved relative to window/viewport at get time)
 
     public ImAnimClip KeyFloatRel(uint channel, float time, float percent, float pxBias, ImAnimAnchorSpace anchorSpace, int axis, ImAnimEaseType easeType = ImAnimEaseType.Linear)
@@ -177,11 +270,21 @@ public unsafe struct ImAnimClip
         return this;
     }
 
+    public ImAnimClip KeyFloatRel(ImU8String channel, float time, float percent, float pxBias, ImAnimAnchorSpace anchorSpace, int axis, ImAnimEaseType easeType = ImAnimEaseType.Linear)
+    {
+        return KeyFloatRel(channel.GetId(), time, percent, pxBias, anchorSpace, axis, easeType);
+    }
+
     public ImAnimClip KeyFloatRel(uint channel, float time, float percent, float pxBias, ImAnimAnchorSpace anchorSpace, int axis, ImAnimEaseType easeType, Vector4 bezier4)
     {
         fixed (ImAnimClip* @this = &this)
             ImAnimNative.ClipKeyFloatRel(@this, channel, time, percent, pxBias, anchorSpace, axis, easeType, &bezier4);
         return this;
+    }
+
+    public ImAnimClip KeyFloatRel(ImU8String channel, float time, float percent, float pxBias, ImAnimAnchorSpace anchorSpace, int axis, ImAnimEaseType easeType, Vector4 bezier4)
+    {
+        return KeyFloatRel(channel.GetId(), time, percent, pxBias, anchorSpace, axis, easeType, bezier4);
     }
 
     public ImAnimClip KeyVec2Rel(uint channel, float time, Vector2 percent, Vector2 pxBias, ImAnimAnchorSpace anchorSpace, ImAnimEaseType easeType = ImAnimEaseType.Linear)
@@ -191,11 +294,21 @@ public unsafe struct ImAnimClip
         return this;
     }
 
+    public ImAnimClip KeyVec2Rel(ImU8String channel, float time, Vector2 percent, Vector2 pxBias, ImAnimAnchorSpace anchorSpace, ImAnimEaseType easeType = ImAnimEaseType.Linear)
+    {
+        return KeyVec2Rel(channel.GetId(), time, percent, pxBias, anchorSpace, easeType);
+    }
+
     public ImAnimClip KeyVec2Rel(uint channel, float time, Vector2 percent, Vector2 pxBias, ImAnimAnchorSpace anchorSpace, ImAnimEaseType easeType, Vector4 bezier4)
     {
         fixed (ImAnimClip* @this = &this)
             ImAnimNative.ClipKeyVec2Rel(@this, channel, time, &percent, &pxBias, anchorSpace, easeType, &bezier4);
         return this;
+    }
+
+    public ImAnimClip KeyVec2Rel(ImU8String channel, float time, Vector2 percent, Vector2 pxBias, ImAnimAnchorSpace anchorSpace, ImAnimEaseType easeType, Vector4 bezier4)
+    {
+        return KeyVec2Rel(channel.GetId(), time, percent, pxBias, anchorSpace, easeType, bezier4);
     }
 
     public ImAnimClip KeyVec4Rel(uint channel, float time, Vector4 percent, Vector4 pxBias, ImAnimAnchorSpace anchorSpace, ImAnimEaseType easeType = ImAnimEaseType.Linear)
@@ -205,11 +318,21 @@ public unsafe struct ImAnimClip
         return this;
     }
 
+    public ImAnimClip KeyVec4Rel(ImU8String channel, float time, Vector4 percent, Vector4 pxBias, ImAnimAnchorSpace anchorSpace, ImAnimEaseType easeType = ImAnimEaseType.Linear)
+    {
+        return KeyVec4Rel(channel.GetId(), time, percent, pxBias, anchorSpace, easeType);
+    }
+
     public ImAnimClip KeyVec4Rel(uint channel, float time, Vector4 percent, Vector4 pxBias, ImAnimAnchorSpace anchorSpace, ImAnimEaseType easeType, Vector4 bezier4)
     {
         fixed (ImAnimClip* @this = &this)
             ImAnimNative.ClipKeyVec4Rel(@this, channel, time, &percent, &pxBias, anchorSpace, easeType, &bezier4);
         return this;
+    }
+
+    public ImAnimClip KeyVec4Rel(ImU8String channel, float time, Vector4 percent, Vector4 pxBias, ImAnimAnchorSpace anchorSpace, ImAnimEaseType easeType, Vector4 bezier4)
+    {
+        return KeyVec4Rel(channel.GetId(), time, percent, pxBias, anchorSpace, easeType, bezier4);
     }
 
     public ImAnimClip KeyColorRel(uint channel, float time, Vector4 percent, Vector4 pxBias, ImAnimColorSpace colorSpace, ImAnimAnchorSpace anchorSpace, ImAnimEaseType easeType = ImAnimEaseType.Linear)
@@ -219,11 +342,21 @@ public unsafe struct ImAnimClip
         return this;
     }
 
+    public ImAnimClip KeyColorRel(ImU8String channel, float time, Vector4 percent, Vector4 pxBias, ImAnimColorSpace colorSpace, ImAnimAnchorSpace anchorSpace, ImAnimEaseType easeType = ImAnimEaseType.Linear)
+    {
+        return KeyColorRel(channel.GetId(), time, percent, pxBias, colorSpace, anchorSpace, easeType);
+    }
+
     public ImAnimClip KeyColorRel(uint channel, float time, Vector4 percent, Vector4 pxBias, ImAnimColorSpace colorSpace, ImAnimAnchorSpace anchorSpace, ImAnimEaseType easeType, Vector4 bezier4)
     {
         fixed (ImAnimClip* @this = &this)
             ImAnimNative.ClipKeyColorRel(@this, channel, time, &percent, &pxBias, colorSpace, anchorSpace, easeType, &bezier4);
         return this;
+    }
+
+    public ImAnimClip KeyColorRel(ImU8String channel, float time, Vector4 percent, Vector4 pxBias, ImAnimColorSpace colorSpace, ImAnimAnchorSpace anchorSpace, ImAnimEaseType easeType, Vector4 bezier4)
+    {
+        return KeyColorRel(channel.GetId(), time, percent, pxBias, colorSpace, anchorSpace, easeType, bezier4);
     }
 
     // Timeline grouping - sequential and parallel keyframe blocks
@@ -272,6 +405,12 @@ public unsafe struct ImAnimClip
         fixed (ImAnimClip* @this = &this)
             ImAnimNative.ClipMarkerId(@this, time, markerId, (delegate* unmanaged[Cdecl]<uint, uint, float, void*, void>)Marshal.GetFunctionPointerForDelegate(cb), userData);
         return this;
+    }
+
+    /// <inheritdoc cref="MarkerId(float, uint, ImAnim.MarkerCallback, void*)"/>
+    public ImAnimClip MarkerId(float time, ImU8String markerId, ImAnim.MarkerCallback cb, void* userData = null)
+    {
+        return MarkerId(time, markerId.GetId(), cb, userData);
     }
 
     /// <summary>
@@ -344,21 +483,42 @@ public unsafe struct ImAnimClip
 
     // Callbacks
 
-    public ImAnimClip OnBegin(ImAnim.ClipCallback cb, void* userData = null)
+    public ImAnimClip OnBegin(ImAnim.ClipCallback cb)
+    {
+        fixed (ImAnimClip* @this = &this)
+            ImAnimNative.ClipOnBegin(@this, (delegate* unmanaged[Cdecl]<uint, void*, void>)Marshal.GetFunctionPointerForDelegate(cb), null);
+        return this;
+    }
+
+    public ImAnimClip OnUpdate(ImAnim.ClipCallback cb)
+    {
+        fixed (ImAnimClip* @this = &this)
+            ImAnimNative.ClipOnUpdate(@this, (delegate* unmanaged[Cdecl]<uint, void*, void>)Marshal.GetFunctionPointerForDelegate(cb), null);
+        return this;
+    }
+
+    public ImAnimClip OnComplete(ImAnim.ClipCallback cb)
+    {
+        fixed (ImAnimClip* @this = &this)
+            ImAnimNative.ClipOnComplete(@this, (delegate* unmanaged[Cdecl]<uint, void*, void>)Marshal.GetFunctionPointerForDelegate(cb), null);
+        return this;
+    }
+
+    public ImAnimClip OnBegin(ImAnim.ClipCallback cb, void* userData)
     {
         fixed (ImAnimClip* @this = &this)
             ImAnimNative.ClipOnBegin(@this, (delegate* unmanaged[Cdecl]<uint, void*, void>)Marshal.GetFunctionPointerForDelegate(cb), userData);
         return this;
     }
 
-    public ImAnimClip OnUpdate(ImAnim.ClipCallback cb, void* userData = null)
+    public ImAnimClip OnUpdate(ImAnim.ClipCallback cb, void* userData)
     {
         fixed (ImAnimClip* @this = &this)
             ImAnimNative.ClipOnUpdate(@this, (delegate* unmanaged[Cdecl]<uint, void*, void>)Marshal.GetFunctionPointerForDelegate(cb), userData);
         return this;
     }
 
-    public ImAnimClip OnComplete(ImAnim.ClipCallback cb, void* userData = null)
+    public ImAnimClip OnComplete(ImAnim.ClipCallback cb, void* userData)
     {
         fixed (ImAnimClip* @this = &this)
             ImAnimNative.ClipOnComplete(@this, (delegate* unmanaged[Cdecl]<uint, void*, void>)Marshal.GetFunctionPointerForDelegate(cb), userData);

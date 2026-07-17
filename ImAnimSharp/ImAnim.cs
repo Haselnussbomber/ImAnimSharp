@@ -190,6 +190,12 @@ public static unsafe class ImAnim
         ImAnimNative.ShowDebugTimeline(instanceId);
     }
 
+    /// <inheritdoc cref="ShowDebugTimeline(uint)"/>
+    public static void ShowDebugTimeline(ImU8String instanceId)
+    {
+        ShowDebugTimeline(instanceId.GetId());
+    }
+
     // Performance Profiler
 
     /// <summary>
@@ -254,6 +260,12 @@ public static unsafe class ImAnim
         return ret;
     }
 
+    /// <inheritdoc cref="DragBegin(uint, Vector2)"/>
+    public static ImAnimDragFeedback DragBegin(ImU8String id, Vector2 pos)
+    {
+        return DragBegin(id.GetId(), pos);
+    }
+
     /// <summary>
     /// Update drag position during drag.
     /// </summary>
@@ -262,6 +274,12 @@ public static unsafe class ImAnim
         ImAnimDragFeedback ret = default;
         ImAnimNative.DragUpdate(&ret, id, &pos, dt);
         return ret;
+    }
+
+    /// <inheritdoc cref="DragUpdate(uint, Vector2, float)"/>
+    public static ImAnimDragFeedback DragUpdate(ImU8String id, Vector2 pos, float dt)
+    {
+        return DragUpdate(id.GetId(), pos, dt);
     }
 
     /// <summary>
@@ -274,12 +292,24 @@ public static unsafe class ImAnim
         return ret;
     }
 
+    /// <inheritdoc cref="DragRelease(uint, Vector2, ImAnimDragOpts, float)"/>
+    public static ImAnimDragFeedback DragRelease(ImU8String id, Vector2 pos, ImAnimDragOpts opts, float dt)
+    {
+        return DragRelease(id.GetId(), pos, opts, dt);
+    }
+
     /// <summary>
     /// Cancel drag tracking.
     /// </summary>
     public static void DragCancel(uint id)
     {
         ImAnimNative.DragCancel(id);
+    }
+
+    /// <inheritdoc cref="DragCancel(uint)"/>
+    public static void DragCancel(ImU8String id)
+    {
+        DragCancel(id.GetId());
     }
 
     // Oscillators - continuous periodic animations
@@ -292,12 +322,24 @@ public static unsafe class ImAnim
         return ImAnimNative.Oscillate(id, amplitude, frequency, waveType, phase, dt);
     }
 
+    /// <inheritdoc cref="Oscillate(uint, float, float, ImAnimWaveType, float, float)"/>
+    public static float Oscillate(ImU8String id, float amplitude, float frequency, ImAnimWaveType waveType, float phase, float dt)
+    {
+        return Oscillate(id.GetId(), amplitude, frequency, waveType, phase, dt);
+    }
+
     /// <summary>
     /// Returns oscillating integer value [-amplitude, +amplitude].
     /// </summary>
     public static int OscillateInt(uint id, int amplitude, float frequency, ImAnimWaveType waveType, float phase, float dt)
     {
         return ImAnimNative.OscillateInt(id, amplitude, frequency, waveType, phase, dt);
+    }
+
+    /// <inheritdoc cref="OscillateInt(uint, int, float, ImAnimWaveType, float, float)"/>
+    public static int OscillateInt(ImU8String id, int amplitude, float frequency, ImAnimWaveType waveType, float phase, float dt)
+    {
+        return OscillateInt(id.GetId(), amplitude, frequency, waveType, phase, dt);
     }
 
     /// <summary>
@@ -317,6 +359,12 @@ public static unsafe class ImAnim
         return ret;
     }
 
+    /// <inheritdoc cref="OscillateVec2(uint, Vector2, Vector2, ImAnimWaveType, Vector2, float)"/>
+    public static Vector2 OscillateVec2(ImU8String id, Vector2 amplitude, Vector2 frequency, ImAnimWaveType waveType, Vector2 phase, float dt)
+    {
+        return OscillateVec2(id.GetId(), amplitude, frequency, waveType, phase, dt);
+    }
+
     /// <summary>
     /// 4D oscillation.
     /// </summary>
@@ -332,6 +380,12 @@ public static unsafe class ImAnim
         Vector4 ret = default;
         ImAnimNative.OscillateVec4(&ret, id, &amplitude, &frequency, waveType, &phase, dt);
         return ret;
+    }
+
+    /// <inheritdoc cref="OscillateVec4(uint, Vector4, Vector4, ImAnimWaveType, Vector4, float)"/>
+    public static Vector4 OscillateVec4(ImU8String id, Vector4 amplitude, Vector4 frequency, ImAnimWaveType waveType, Vector4 phase, float dt)
+    {
+        return OscillateVec4(id.GetId(), amplitude, frequency, waveType, phase, dt);
     }
 
     /// <summary>
@@ -353,6 +407,12 @@ public static unsafe class ImAnim
         return ret;
     }
 
+    /// <inheritdoc cref="OscillateColor(uint, Vector4, Vector4, float, ImAnimWaveType, float, ImAnimColorSpace, float)"/>
+    public static Vector4 OscillateColor(ImU8String id, Vector4 baseColor, Vector4 amplitude, float frequency, ImAnimWaveType waveType, float phase, ImAnimColorSpace colorSpace, float dt)
+    {
+        return OscillateColor(id.GetId(), baseColor, amplitude, frequency, waveType, phase, colorSpace, dt);
+    }
+
     // Shake/Wiggle - procedural noise animations
 
     /// <summary>
@@ -369,6 +429,12 @@ public static unsafe class ImAnim
         return ImAnimNative.Shake(id, intensity, frequency, decayTime, dt);
     }
 
+    /// <inheritdoc cref="Shake(uint, float, float, float, float)"/>
+    public static float Shake(ImU8String id, float intensity, float frequency, float decayTime, float dt)
+    {
+        return Shake(id.GetId(), intensity, frequency, decayTime, dt);
+    }
+
     /// <summary>
     /// Decaying random shake for integers.
     /// </summary>
@@ -381,6 +447,12 @@ public static unsafe class ImAnim
     public static int ShakeInt(uint id, int intensity, float frequency, float decayTime, float dt)
     {
         return ImAnimNative.ShakeInt(id, intensity, frequency, decayTime, dt);
+    }
+
+    /// <inheritdoc cref="ShakeInt(uint, int, float, float, float)"/>
+    public static int ShakeInt(ImU8String id, int intensity, float frequency, float decayTime, float dt)
+    {
+        return ShakeInt(id.GetId(), intensity, frequency, decayTime, dt);
     }
 
     /// <summary>
@@ -399,6 +471,12 @@ public static unsafe class ImAnim
         return ret;
     }
 
+    /// <inheritdoc cref="ShakeVec2(uint, Vector2, float, float, float)"/>
+    public static Vector2 ShakeVec2(ImU8String id, Vector2 intensity, float frequency, float decayTime, float dt)
+    {
+        return ShakeVec2(id.GetId(), intensity, frequency, decayTime, dt);
+    }
+
     /// <summary>
     /// 4D decaying shake.
     /// </summary>
@@ -413,6 +491,12 @@ public static unsafe class ImAnim
         Vector4 ret = default;
         ImAnimNative.ShakeVec4(&ret, id, &intensity, frequency, decayTime, dt);
         return ret;
+    }
+
+    /// <inheritdoc cref="ShakeVec4(uint, Vector4, float, float, float)"/>
+    public static Vector4 ShakeVec4(ImU8String id, Vector4 intensity, float frequency, float decayTime, float dt)
+    {
+        return ShakeVec4(id.GetId(), intensity, frequency, decayTime, dt);
     }
 
     /// <summary>
@@ -433,6 +517,12 @@ public static unsafe class ImAnim
         return ret;
     }
 
+    /// <inheritdoc cref="ShakeColor(uint, Vector4, Vector4, float, float, ImAnimColorSpace, float)"/>
+    public static Vector4 ShakeColor(ImU8String id, Vector4 baseColor, Vector4 intensity, float frequency, float decayTime, ImAnimColorSpace colorSpace, float dt)
+    {
+        return ShakeColor(id.GetId(), baseColor, intensity, frequency, decayTime, colorSpace, dt);
+    }
+
     /// <summary>
     /// Continuous smooth random movement.
     /// </summary>
@@ -445,6 +535,12 @@ public static unsafe class ImAnim
         return ImAnimNative.Wiggle(id, amplitude, frequency, dt);
     }
 
+    /// <inheritdoc cref="Wiggle(uint, float, float, float)"/>
+    public static float Wiggle(ImU8String id, float amplitude, float frequency, float dt)
+    {
+        return Wiggle(id.GetId(), amplitude, frequency, dt);
+    }
+
     /// <summary>
     /// Continuous smooth random movement for integers.
     /// </summary>
@@ -455,6 +551,12 @@ public static unsafe class ImAnim
     public static int WiggleInt(uint id, int amplitude, float frequency, float dt)
     {
         return ImAnimNative.WiggleInt(id, amplitude, frequency, dt);
+    }
+
+    /// <inheritdoc cref="WiggleInt(uint, int, float, float)"/>
+    public static int WiggleInt(ImU8String id, int amplitude, float frequency, float dt)
+    {
+        return WiggleInt(id.GetId(), amplitude, frequency, dt);
     }
 
     /// <summary>
@@ -471,6 +573,12 @@ public static unsafe class ImAnim
         return ret;
     }
 
+    /// <inheritdoc cref="WiggleVec2(uint, Vector2, float, float)"/>
+    public static Vector2 WiggleVec2(ImU8String id, Vector2 amplitude, float frequency, float dt)
+    {
+        return WiggleVec2(id.GetId(), amplitude, frequency, dt);
+    }
+
     /// <summary>
     /// 4D continuous wiggle.
     /// </summary>
@@ -483,6 +591,12 @@ public static unsafe class ImAnim
         Vector4 ret = default;
         ImAnimNative.WiggleVec4(&ret, id, &amplitude, frequency, dt);
         return ret;
+    }
+
+    /// <inheritdoc cref="WiggleVec4(uint, Vector4, float, float)"/>
+    public static Vector4 WiggleVec4(ImU8String id, Vector4 amplitude, float frequency, float dt)
+    {
+        return WiggleVec4(id.GetId(), amplitude, frequency, dt);
     }
 
     /// <summary>
@@ -501,12 +615,24 @@ public static unsafe class ImAnim
         return ret;
     }
 
+    /// <inheritdoc cref="WiggleColor(uint, Vector4, Vector4, float, ImAnimColorSpace, float)"/>
+    public static Vector4 WiggleColor(ImU8String id, Vector4 baseColor, Vector4 amplitude, float frequency, ImAnimColorSpace colorSpace, float dt)
+    {
+        return WiggleColor(id.GetId(), baseColor, amplitude, frequency, colorSpace, dt);
+    }
+
     /// <summary>
     /// Trigger/restart a shake animation.
     /// </summary>
     public static void TriggerShake(uint id)
     {
         ImAnimNative.TriggerShake(id);
+    }
+
+    /// <inheritdoc cref="TriggerShake(uint)"/>
+    public static void TriggerShake(ImU8String id)
+    {
+        TriggerShake(id.GetId());
     }
 
     // Easing evaluation
@@ -537,6 +663,12 @@ public static unsafe class ImAnim
         return ImAnimNative.TweenFloat(id, channelId, target, dur, &ez, policy, dt, initValue);
     }
 
+    /// <inheritdoc cref="TweenFloat(uint, uint, float, float, ImAnimEaseDesc, ImAnimPolicy, float, float)"/>
+    public static float TweenFloat(ImU8String id, ImU8String channelId, float target, float dur, ImAnimEaseDesc ez, ImAnimPolicy policy, float dt, float initValue = 0f)
+    {
+        return TweenFloat(id.GetId(), channelId.GetId(), target, dur, ez, policy, dt, initValue);
+    }
+
     /// <summary>
     /// Animate a 2D vector.
     /// </summary>
@@ -554,6 +686,12 @@ public static unsafe class ImAnim
         Vector2 init_value = initValue ?? Vector2.Zero;
         ImAnimNative.TweenVec2(&ret, id, channelId, &target, dur, &ez, policy, dt, &init_value);
         return ret;
+    }
+
+    /// <inheritdoc cref="TweenVec2(uint, uint, Vector2, float, ImAnimEaseDesc, ImAnimPolicy, float, Vector2?)"/>
+    public static Vector2 TweenVec2(ImU8String id, ImU8String channelId, Vector2 target, float dur, ImAnimEaseDesc ez, ImAnimPolicy policy, float dt, Vector2? initValue = null)
+    {
+        return TweenVec2(id.GetId(), channelId.GetId(), target, dur, ez, policy, dt, initValue);
     }
 
     /// <summary>
@@ -575,6 +713,12 @@ public static unsafe class ImAnim
         return ret;
     }
 
+    /// <inheritdoc cref="TweenVec4(uint, uint, Vector4, float, ImAnimEaseDesc, ImAnimPolicy, float, Vector4?)"/>
+    public static Vector4 TweenVec4(ImU8String id, ImU8String channelId, Vector4 target, float dur, ImAnimEaseDesc ez, ImAnimPolicy policy, float dt, Vector4? initValue = null)
+    {
+        return TweenVec4(id.GetId(), channelId.GetId(), target, dur, ez, policy, dt, initValue);
+    }
+
     /// <summary>
     /// Animate an integer value.
     /// </summary>
@@ -589,6 +733,12 @@ public static unsafe class ImAnim
     public static int TweenInt(uint id, uint channelId, int target, float dur, ImAnimEaseDesc ez, ImAnimPolicy policy, float dt, int initValue = 0)
     {
         return ImAnimNative.TweenInt(id, channelId, target, dur, &ez, policy, dt, initValue);
+    }
+
+    /// <inheritdoc cref="TweenInt(uint, uint, int, float, ImAnimEaseDesc, ImAnimPolicy, float, int)"/>
+    public static int TweenInt(ImU8String id, ImU8String channelId, int target, float dur, ImAnimEaseDesc ez, ImAnimPolicy policy, float dt, int initValue = 0)
+    {
+        return TweenInt(id.GetId(), channelId.GetId(), target, dur, ez, policy, dt, initValue);
     }
 
     /// <summary>
@@ -608,6 +758,12 @@ public static unsafe class ImAnim
         Vector4 init_value = initValue ?? Vector4.Zero;
         ImAnimNative.TweenColor(&ret, id, channelId, &targetSrgb, dur, &ez, policy, colorSpace, dt, &init_value);
         return ret;
+    }
+
+    /// <inheritdoc cref="TweenColor(uint, uint, Vector4, float, ImAnimEaseDesc, ImAnimPolicy, ImAnimColorSpace, float, Vector4?)"/>
+    public static Vector4 TweenColor(ImU8String id, ImU8String channelId, Vector4 targetSrgb, float dur, ImAnimEaseDesc ez, ImAnimPolicy policy, ImAnimColorSpace colorSpace, float dt, Vector4? initValue = null)
+    {
+        return TweenColor(id.GetId(), channelId.GetId(), targetSrgb, dur, ez, policy, colorSpace, dt, initValue);
     }
 
     // Resize-friendly helpers
@@ -632,6 +788,12 @@ public static unsafe class ImAnim
         return ImAnimNative.TweenFloatRel(id, channelId, percent, pxBias, dur, &ez, policy, anchorSpace, axis, dt);
     }
 
+    /// <inheritdoc cref="TweenFloatRel(uint, uint, float, float, float, ImAnimEaseDesc, ImAnimPolicy, ImAnimAnchorSpace, int, float)"/>
+    public static float TweenFloatRel(ImU8String id, ImU8String channelId, float percent, float pxBias, float dur, ImAnimEaseDesc ez, ImAnimPolicy policy, ImAnimAnchorSpace anchorSpace, int axis, float dt)
+    {
+        return TweenFloatRel(id.GetId(), channelId.GetId(), percent, pxBias, dur, ez, policy, anchorSpace, axis, dt);
+    }
+
     /// <summary>
     /// Vec2 relative to anchor.
     /// </summary>
@@ -640,6 +802,12 @@ public static unsafe class ImAnim
         Vector2 ret = default;
         ImAnimNative.TweenVec2Rel(&ret, id, channelId, &percent, &pxBias, dur, &ez, policy, anchorSpace, dt);
         return ret;
+    }
+
+    /// <inheritdoc cref="TweenVec2Rel(uint, uint, Vector2, Vector2, float, ImAnimEaseDesc, ImAnimPolicy, ImAnimAnchorSpace, float)"/>
+    public static Vector2 TweenVec2Rel(ImU8String id, ImU8String channelId, Vector2 percent, Vector2 pxBias, float dur, ImAnimEaseDesc ez, ImAnimPolicy policy, ImAnimAnchorSpace anchorSpace, float dt)
+    {
+        return TweenVec2Rel(id.GetId(), channelId.GetId(), percent, pxBias, dur, ez, policy, anchorSpace, dt);
     }
 
     /// <summary>
@@ -652,6 +820,12 @@ public static unsafe class ImAnim
         return ret;
     }
 
+    /// <inheritdoc cref="TweenVec4Rel(uint, uint, Vector4, Vector4, float, ImAnimEaseDesc, ImAnimPolicy, ImAnimAnchorSpace, float)"/>
+    public static Vector4 TweenVec4Rel(ImU8String id, ImU8String channelId, Vector4 percent, Vector4 pxBias, float dur, ImAnimEaseDesc ez, ImAnimPolicy policy, ImAnimAnchorSpace anchorSpace, float dt)
+    {
+        return TweenVec4Rel(id.GetId(), channelId.GetId(), percent, pxBias, dur, ez, policy, anchorSpace, dt);
+    }
+
     /// <summary>
     /// Color with component offsets.
     /// </summary>
@@ -660,6 +834,12 @@ public static unsafe class ImAnim
         Vector4 ret = default;
         ImAnimNative.TweenColorRel(&ret, id, channelId, &percent, &pxBias, dur, &ez, policy, colorSpace, anchorSpace, dt);
         return ret;
+    }
+
+    /// <inheritdoc cref="TweenColorRel(uint, uint, Vector4, Vector4, float, ImAnimEaseDesc, ImAnimPolicy, ImAnimColorSpace, ImAnimAnchorSpace, float)"/>
+    public static Vector4 TweenColorRel(ImU8String id, ImU8String channelId, Vector4 percent, Vector4 pxBias, float dur, ImAnimEaseDesc ez, ImAnimPolicy policy, ImAnimColorSpace colorSpace, ImAnimAnchorSpace anchorSpace, float dt)
+    {
+        return TweenColorRel(id.GetId(), channelId.GetId(), percent, pxBias, dur, ez, policy, colorSpace, anchorSpace, dt);
     }
 
     // Rebase functions - change target of in-progress animation without restarting
@@ -672,12 +852,24 @@ public static unsafe class ImAnim
         ImAnimNative.RebaseFloat(id, channelId, newTarget, dt);
     }
 
+    /// <inheritdoc cref="RebaseFloat(uint, uint, float, float)"/>
+    public static void RebaseFloat(ImU8String id, ImU8String channelId, float newTarget, float dt)
+    {
+        RebaseFloat(id.GetId(), channelId.GetId(), newTarget, dt);
+    }
+
     /// <summary>
     /// Smoothly redirect vec2 animation to new target.
     /// </summary>
     public static void RebaseVec2(uint id, uint channelId, Vector2 newTarget, float dt)
     {
         ImAnimNative.RebaseVec2(id, channelId, &newTarget, dt);
+    }
+
+    /// <inheritdoc cref="RebaseVec2(uint, uint, Vector2, float)"/>
+    public static void RebaseVec2(ImU8String id, ImU8String channelId, Vector2 newTarget, float dt)
+    {
+        RebaseVec2(id.GetId(), channelId.GetId(), newTarget, dt);
     }
 
     /// <summary>
@@ -688,6 +880,12 @@ public static unsafe class ImAnim
         ImAnimNative.RebaseVec4(id, channelId, &newTarget, dt);
     }
 
+    /// <inheritdoc cref="RebaseVec4(uint, uint, Vector4, float)"/>
+    public static void RebaseVec4(ImU8String id, ImU8String channelId, Vector4 newTarget, float dt)
+    {
+        RebaseVec4(id.GetId(), channelId.GetId(), newTarget, dt);
+    }
+
     /// <summary>
     /// Smoothly redirect color animation to new target.
     /// </summary>
@@ -696,12 +894,24 @@ public static unsafe class ImAnim
         ImAnimNative.RebaseInt(id, channelId, newTarget, dt);
     }
 
+    /// <inheritdoc cref="RebaseInt(uint, uint, int, float)"/>
+    public static void RebaseInt(ImU8String id, ImU8String channelId, int newTarget, float dt)
+    {
+        RebaseInt(id.GetId(), channelId.GetId(), newTarget, dt);
+    }
+
     /// <summary>
     /// Smoothly redirect int animation to new target.
     /// </summary>
     public static void RebaseColor(uint id, uint channelId, Vector4 newTarget, float dt)
     {
         ImAnimNative.RebaseColor(id, channelId, &newTarget, dt);
+    }
+
+    /// <inheritdoc cref="RebaseColor(uint, uint, Vector4, float)"/>
+    public static void RebaseColor(ImU8String id, ImU8String channelId, Vector4 newTarget, float dt)
+    {
+        RebaseColor(id.GetId(), channelId.GetId(), newTarget, dt);
     }
 
     // Resolved tweens - target computed dynamically by callback each frame
@@ -715,12 +925,24 @@ public static unsafe class ImAnim
         return ImAnimNative.TweenFloatResolved(id, channelId, (delegate* unmanaged[Cdecl]<void*, float>)Marshal.GetFunctionPointerForDelegate(callback), null, dur, &ez, policy, dt);
     }
 
+    /// <inheritdoc cref="TweenFloatResolved(uint, uint, Func{float}, float, ImAnimEaseDesc, ImAnimPolicy, float)"/>
+    public static float TweenFloatResolved(ImU8String id, ImU8String channelId, Func<float> fn, float dur, ImAnimEaseDesc ez, ImAnimPolicy policy, float dt)
+    {
+        return TweenFloatResolved(id.GetId(), channelId.GetId(), fn, dur, ez, policy, dt);
+    }
+
     /// <summary>
     /// Float with dynamic target.
     /// </summary>
     public static float TweenFloatResolved(uint id, uint channelId, FloatResolver fn, void* userData, float dur, ImAnimEaseDesc ez, ImAnimPolicy policy, float dt)
     {
         return ImAnimNative.TweenFloatResolved(id, channelId, (delegate* unmanaged[Cdecl]<void*, float>)Marshal.GetFunctionPointerForDelegate(fn), userData, dur, &ez, policy, dt);
+    }
+
+    /// <inheritdoc cref="TweenFloatResolved(uint, uint, FloatResolver, void*, float, ImAnimEaseDesc, ImAnimPolicy, float)"/>
+    public static float TweenFloatResolved(ImU8String id, ImU8String channelId, FloatResolver fn, void* userData, float dur, ImAnimEaseDesc ez, ImAnimPolicy policy, float dt)
+    {
+        return TweenFloatResolved(id.GetId(), channelId.GetId(), fn, userData, dur, ez, policy, dt);
     }
 
     /// <summary>
@@ -734,6 +956,12 @@ public static unsafe class ImAnim
         return ret;
     }
 
+    /// <inheritdoc cref="TweenVec2Resolved(uint, uint, Func{Vector2}, float, ImAnimEaseDesc, ImAnimPolicy, float)"/>
+    public static Vector2 TweenVec2Resolved(ImU8String id, ImU8String channelId, Func<Vector2> fn, float dur, ImAnimEaseDesc ez, ImAnimPolicy policy, float dt)
+    {
+        return TweenVec2Resolved(id.GetId(), channelId.GetId(), fn, dur, ez, policy, dt);
+    }
+
     /// <summary>
     /// Vec2 with dynamic target.
     /// </summary>
@@ -742,6 +970,12 @@ public static unsafe class ImAnim
         Vector2 ret = default;
         ImAnimNative.TweenVec2Resolved(&ret, id, channelId, (delegate* unmanaged[Cdecl]<void*, Vector2>)Marshal.GetFunctionPointerForDelegate(fn), userData, dur, &ez, policy, dt);
         return ret;
+    }
+
+    /// <inheritdoc cref="TweenVec2Resolved(uint, uint, Vec2Resolver, void*, float, ImAnimEaseDesc, ImAnimPolicy, float)"/>
+    public static Vector2 TweenVec2Resolved(ImU8String id, ImU8String channelId, Vec2Resolver fn, void* userData, float dur, ImAnimEaseDesc ez, ImAnimPolicy policy, float dt)
+    {
+        return TweenVec2Resolved(id.GetId(), channelId.GetId(), fn, userData, dur, ez, policy, dt);
     }
 
     /// <summary>
@@ -755,6 +989,12 @@ public static unsafe class ImAnim
         return ret;
     }
 
+    /// <inheritdoc cref="TweenVec4Resolved(uint, uint, Func{Vector4}, float, ImAnimEaseDesc, ImAnimPolicy, float)"/>
+    public static Vector4 TweenVec4Resolved(ImU8String id, ImU8String channelId, Func<Vector4> fn, float dur, ImAnimEaseDesc ez, ImAnimPolicy policy, float dt)
+    {
+        return TweenVec4Resolved(id.GetId(), channelId.GetId(), fn, dur, ez, policy, dt);
+    }
+
     /// <summary>
     /// Vec4 with dynamic target.
     /// </summary>
@@ -763,6 +1003,12 @@ public static unsafe class ImAnim
         Vector4 ret = default;
         ImAnimNative.TweenVec4Resolved(&ret, id, channelId, (delegate* unmanaged[Cdecl]<void*, Vector4>)Marshal.GetFunctionPointerForDelegate(fn), userData, dur, &ez, policy, dt);
         return ret;
+    }
+
+    /// <inheritdoc cref="TweenVec4Resolved(uint, uint, Vec4Resolver, void*, float, ImAnimEaseDesc, ImAnimPolicy, float)"/>
+    public static Vector4 TweenVec4Resolved(ImU8String id, ImU8String channelId, Vec4Resolver fn, void* userData, float dur, ImAnimEaseDesc ez, ImAnimPolicy policy, float dt)
+    {
+        return TweenVec4Resolved(id.GetId(), channelId.GetId(), fn, userData, dur, ez, policy, dt);
     }
 
     /// <summary>
@@ -776,6 +1022,12 @@ public static unsafe class ImAnim
         return ret;
     }
 
+    /// <inheritdoc cref="TweenColorResolved(uint, uint, Func{Vector4}, float, ImAnimEaseDesc, ImAnimPolicy, ImAnimColorSpace, float)"/>
+    public static Vector4 TweenColorResolved(ImU8String id, ImU8String channelId, Func<Vector4> fn, float dur, ImAnimEaseDesc ez, ImAnimPolicy policy, ImAnimColorSpace colorSpace, float dt)
+    {
+        return TweenColorResolved(id.GetId(), channelId.GetId(), fn, dur, ez, policy, colorSpace, dt);
+    }
+
     /// <summary>
     /// Color with dynamic target.
     /// </summary>
@@ -784,6 +1036,12 @@ public static unsafe class ImAnim
         Vector4 ret = default;
         ImAnimNative.TweenColorResolved(&ret, id, channelId, (delegate* unmanaged[Cdecl]<void*, Vector4>)Marshal.GetFunctionPointerForDelegate(fn), userData, dur, &ez, policy, colorSpace, dt);
         return ret;
+    }
+
+    /// <inheritdoc cref="TweenColorResolved(uint, uint, Vec4Resolver, void*, float, ImAnimEaseDesc, ImAnimPolicy, ImAnimColorSpace, float)"/>
+    public static Vector4 TweenColorResolved(ImU8String id, ImU8String channelId, Vec4Resolver fn, void* userData, float dur, ImAnimEaseDesc ez, ImAnimPolicy policy, ImAnimColorSpace colorSpace, float dt)
+    {
+        return TweenColorResolved(id.GetId(), channelId.GetId(), fn, userData, dur, ez, policy, colorSpace, dt);
     }
 
     /// <summary>
@@ -795,12 +1053,24 @@ public static unsafe class ImAnim
         return ImAnimNative.TweenIntResolved(id, channelId, (delegate* unmanaged[Cdecl]<void*, int>)Marshal.GetFunctionPointerForDelegate(callback), null, dur, &ez, policy, dt);
     }
 
+    /// <inheritdoc cref="TweenIntResolved(uint, uint, Func{int}, float, ImAnimEaseDesc, ImAnimPolicy, float)"/>
+    public static int TweenIntResolved(ImU8String id, ImU8String channelId, Func<int> fn, float dur, ImAnimEaseDesc ez, ImAnimPolicy policy, float dt)
+    {
+        return TweenIntResolved(id.GetId(), channelId.GetId(), fn, dur, ez, policy, dt);
+    }
+
     /// <summary>
     /// Int with dynamic target.
     /// </summary>
     public static int TweenIntResolved(uint id, uint channelId, IntResolver fn, void* userData, float dur, ImAnimEaseDesc ez, ImAnimPolicy policy, float dt)
     {
         return ImAnimNative.TweenIntResolved(id, channelId, (delegate* unmanaged[Cdecl]<void*, int>)Marshal.GetFunctionPointerForDelegate(fn), userData, dur, &ez, policy, dt);
+    }
+
+    /// <inheritdoc cref="TweenIntResolved(uint, uint, IntResolver, void*, float, ImAnimEaseDesc, ImAnimPolicy, float)"/>
+    public static int TweenIntResolved(ImU8String id, ImU8String channelId, IntResolver fn, void* userData, float dur, ImAnimEaseDesc ez, ImAnimPolicy policy, float dt)
+    {
+        return TweenIntResolved(id.GetId(), channelId.GetId(), fn, userData, dur, ez, policy, dt);
     }
 
     // Color blending utility
@@ -963,6 +1233,13 @@ public static unsafe class ImAnim
 
     // Tween with per-axis easing - each component uses its own easing curve
 
+    public static Vector2 TweenVec2PerAxis(ImU8String id, ImU8String channelId, Vector2 target, float dur, ImAnimEasePerAxis ez, ImAnimPolicy policy, float dt)
+    {
+        Vector2 ret = default;
+        ImAnimNative.TweenVec2PerAxis(&ret, id.GetId(), channelId.GetId(), &target, dur, &ez, policy, dt);
+        return ret;
+    }
+
     public static Vector2 TweenVec2PerAxis(uint id, uint channelId, Vector2 target, float dur, ImAnimEasePerAxis ez, ImAnimPolicy policy, float dt)
     {
         Vector2 ret = default;
@@ -970,10 +1247,24 @@ public static unsafe class ImAnim
         return ret;
     }
 
+    public static Vector4 TweenVec4PerAxis(ImU8String id, ImU8String channelId, Vector4 target, float dur, ImAnimEasePerAxis ez, ImAnimPolicy policy, float dt)
+    {
+        Vector4 ret = default;
+        ImAnimNative.TweenVec4PerAxis(&ret, id.GetId(), channelId.GetId(), &target, dur, &ez, policy, dt);
+        return ret;
+    }
+
     public static Vector4 TweenVec4PerAxis(uint id, uint channelId, Vector4 target, float dur, ImAnimEasePerAxis ez, ImAnimPolicy policy, float dt)
     {
         Vector4 ret = default;
         ImAnimNative.TweenVec4PerAxis(&ret, id, channelId, &target, dur, &ez, policy, dt);
+        return ret;
+    }
+
+    public static Vector4 TweenColorPerAxis(ImU8String id, ImU8String channelId, Vector4 targetSrgb, float dur, ImAnimEasePerAxis ez, ImAnimPolicy policy, ImAnimColorSpace colorSpace, float dt)
+    {
+        Vector4 ret = default;
+        ImAnimNative.TweenColorPerAxis(&ret, id.GetId(), channelId.GetId(), &targetSrgb, dur, &ez, policy, colorSpace, dt);
         return ret;
     }
 
@@ -1055,13 +1346,6 @@ public static unsafe class ImAnim
 
     // Query path info
 
-    public static ImAnimPath PathBegin(uint pathId, Vector2 start)
-    {
-        ImAnimPath ret = default;
-        ImAnimNative.PathBegin(&ret, pathId, &start);
-        return ret;
-    }
-
     /// <summary>
     /// Check if path exists.
     /// </summary>
@@ -1070,12 +1354,24 @@ public static unsafe class ImAnim
         return ImAnimNative.PathExists(pathId) == 1;
     }
 
+    /// <inheritdoc cref="PathExists(uint)"/>
+    public static bool PathExists(ImU8String pathId)
+    {
+        return PathExists(pathId.GetId());
+    }
+
     /// <summary>
     /// Get approximate path length.
     /// </summary>
     public static float PathLength(uint pathId)
     {
         return ImAnimNative.PathLength(pathId);
+    }
+
+    /// <inheritdoc cref="PathLength(uint)"/>
+    public static float PathLength(ImU8String pathId)
+    {
+        return PathLength(pathId.GetId());
     }
 
     /// <summary>
@@ -1088,6 +1384,12 @@ public static unsafe class ImAnim
         return ret;
     }
 
+    /// <inheritdoc cref="PathEvaluate(uint, float)"/>
+    public static Vector2 PathEvaluate(ImU8String pathId, float t)
+    {
+        return PathEvaluate(pathId.GetId(), t);
+    }
+
     /// <summary>
     /// Get tangent (normalized direction) at t.
     /// </summary>
@@ -1098,12 +1400,24 @@ public static unsafe class ImAnim
         return ret;
     }
 
+    /// <inheritdoc cref="PathTangent(uint, float)"/>
+    public static Vector2 PathTangent(ImU8String pathId, float t)
+    {
+        return PathTangent(pathId.GetId(), t);
+    }
+
     /// <summary>
     /// Get rotation angle (radians) at t.
     /// </summary>
     public static float PathAngle(uint pathId, float t)
     {
         return ImAnimNative.PathAngle(pathId, t);
+    }
+
+    /// <inheritdoc cref="PathAngle(uint, float)"/>
+    public static float PathAngle(ImU8String pathId, float t)
+    {
+        return PathAngle(pathId.GetId(), t);
     }
 
     // Tween along a path
@@ -1118,12 +1432,24 @@ public static unsafe class ImAnim
         return ret;
     }
 
+    /// <inheritdoc cref="TweenPath(uint, uint, uint, float, ImAnimEaseDesc, ImAnimPolicy, float)"/>
+    public static Vector2 TweenPath(ImU8String id, ImU8String channelId, ImU8String pathId, float dur, ImAnimEaseDesc ez, ImAnimPolicy policy, float dt = -1f)
+    {
+        return TweenPath(id.GetId(), channelId.GetId(), pathId.GetId(), dur, ez, policy, dt);
+    }
+
     /// <summary>
     /// Animate rotation angle along path.
     /// </summary>
     public static float TweenPathAngle(uint id, uint channelId, uint pathId, float dur, ImAnimEaseDesc ez, ImAnimPolicy policy, float dt = -1f)
     {
         return ImAnimNative.TweenPathAngle(id, channelId, pathId, dur, &ez, policy, dt);
+    }
+
+    /// <inheritdoc cref="TweenPathAngle(uint, uint, uint, float, ImAnimEaseDesc, ImAnimPolicy, float)"/>
+    public static float TweenPathAngle(ImU8String id, ImU8String channelId, ImU8String pathId, float dur, ImAnimEaseDesc ez, ImAnimPolicy policy, float dt = -1f)
+    {
+        return TweenPathAngle(id.GetId(), channelId.GetId(), pathId.GetId(), dur, ez, policy, dt);
     }
 
 
@@ -1141,12 +1467,24 @@ public static unsafe class ImAnim
         ImAnimNative.PathBuildArcLut(pathId, subdivisions);
     }
 
+    /// <inheritdoc cref="PathBuildArcLut(uint, int)"/>
+    public static void PathBuildArcLut(ImU8String pathId, int subdivisions)
+    {
+        PathBuildArcLut(pathId.GetId(), subdivisions);
+    }
+
     /// <summary>
     /// Check if path has precomputed LUT.
     /// </summary>
     public static bool PathHasArcLut(uint pathId)
     {
         return ImAnimNative.PathHasArcLut(pathId) == 1;
+    }
+
+    /// <inheritdoc cref="PathHasArcLut(uint)"/>
+    public static bool PathHasArcLut(ImU8String pathId)
+    {
+        return PathHasArcLut(pathId.GetId());
     }
 
     // Distance-based path evaluation (uses arc-length LUT for constant speed)
@@ -1159,6 +1497,12 @@ public static unsafe class ImAnim
         return ImAnimNative.PathDistanceToT(pathId, distance);
     }
 
+    /// <inheritdoc cref="PathDistanceToT(uint, float)"/>
+    public static float PathDistanceToT(ImU8String pathId, float distance)
+    {
+        return PathDistanceToT(pathId.GetId(), distance);
+    }
+
     /// <summary>
     /// Get position at arc-length distance.
     /// </summary>
@@ -1169,12 +1513,24 @@ public static unsafe class ImAnim
         return ret;
     }
 
+    /// <inheritdoc cref="PathEvaluateAtDistance(uint, float)"/>
+    public static Vector2 PathEvaluateAtDistance(ImU8String pathId, float distance)
+    {
+        return PathEvaluateAtDistance(pathId.GetId(), distance);
+    }
+
     /// <summary>
     /// Get rotation angle at arc-length distance.
     /// </summary>
     public static float PathAngleAtDistance(uint pathId, float distance)
     {
         return ImAnimNative.PathAngleAtDistance(pathId, distance);
+    }
+
+    /// <inheritdoc cref="PathAngleAtDistance(uint, float)"/>
+    public static float PathAngleAtDistance(ImU8String pathId, float distance)
+    {
+        return PathAngleAtDistance(pathId.GetId(), distance);
     }
 
     /// <summary>
@@ -1185,6 +1541,12 @@ public static unsafe class ImAnim
         Vector2 ret = default;
         ImAnimNative.PathTangentAtDistance(&ret, pathId, distance);
         return ret;
+    }
+
+    /// <inheritdoc cref="PathTangentAtDistance(uint, float)"/>
+    public static Vector2 PathTangentAtDistance(ImU8String pathId, float distance)
+    {
+        return PathTangentAtDistance(pathId.GetId(), distance);
     }
 
 
@@ -1205,11 +1567,23 @@ public static unsafe class ImAnim
     }
 
     /// <inheritdoc cref="PathMorph(uint, uint, float, float)"/>
+    public static Vector2 PathMorph(ImU8String pathA, ImU8String pathB, float t, float blend)
+    {
+        return PathMorph(pathA.GetId(), pathB.GetId(), t, blend);
+    }
+
+    /// <inheritdoc cref="PathMorph(uint, uint, float, float)"/>
     public static Vector2 PathMorph(uint pathA, uint pathB, float t, float blend, ImAnimMorphOpts opts)
     {
         Vector2 ret = default;
         ImAnimNative.PathMorph(&ret, pathA, pathB, t, blend, &opts);
         return ret;
+    }
+
+    /// <inheritdoc cref="PathMorph(uint, uint, float, float)"/>
+    public static Vector2 PathMorph(ImU8String pathA, ImU8String pathB, float t, float blend, ImAnimMorphOpts opts)
+    {
+        return PathMorph(pathA.GetId(), pathB.GetId(), t, blend, opts);
     }
 
     /// <summary>
@@ -1223,11 +1597,23 @@ public static unsafe class ImAnim
     }
 
     /// <inheritdoc cref="PathMorphTangent(uint, uint, float, float)"/>
+    public static Vector2 PathMorphTangent(ImU8String pathA, ImU8String pathB, float t, float blend)
+    {
+        return PathMorphTangent(pathA.GetId(), pathB.GetId(), t, blend);
+    }
+
+    /// <inheritdoc cref="PathMorphTangent(uint, uint, float, float)"/>
     public static Vector2 PathMorphTangent(uint pathA, uint pathB, float t, float blend, ImAnimMorphOpts opts)
     {
         Vector2 ret = default;
         ImAnimNative.PathMorphTangent(&ret, pathA, pathB, t, blend, &opts);
         return ret;
+    }
+
+    /// <inheritdoc cref="PathMorphTangent(uint, uint, float, float, ImAnimMorphOpts)"/>
+    public static Vector2 PathMorphTangent(ImU8String pathA, ImU8String pathB, float t, float blend, ImAnimMorphOpts opts)
+    {
+        return PathMorphTangent(pathA.GetId(), pathB.GetId(), t, blend, opts);
     }
 
     /// <summary>
@@ -1239,9 +1625,21 @@ public static unsafe class ImAnim
     }
 
     /// <inheritdoc cref="PathMorphAngle(uint, uint, float, float)"/>
+    public static float PathMorphAngle(ImU8String pathA, ImU8String pathB, float t, float blend)
+    {
+        return PathMorphAngle(pathA.GetId(), pathB.GetId(), t, blend);
+    }
+
+    /// <inheritdoc cref="PathMorphAngle(uint, uint, float, float)"/>
     public static float PathMorphAngle(uint pathA, uint pathB, float t, float blend, ImAnimMorphOpts opts)
     {
         return ImAnimNative.PathMorphAngle(pathA, pathB, t, blend, &opts);
+    }
+
+    /// <inheritdoc cref="PathMorphAngle(uint, uint, float, float)"/>
+    public static float PathMorphAngle(ImU8String pathA, ImU8String pathB, float t, float blend, ImAnimMorphOpts opts)
+    {
+        return PathMorphAngle(pathA.GetId(), pathB.GetId(), t, blend, opts);
     }
 
     /// <summary>
@@ -1255,11 +1653,23 @@ public static unsafe class ImAnim
     }
 
     /// <inheritdoc cref="TweenPathMorph(uint, uint, uint, uint, float, float, ImAnimEaseDesc, ImAnimEaseDesc, ImAnimPolicy, float)"/>
+    public static Vector2 TweenPathMorph(ImU8String id, ImU8String channelId, ImU8String pathA, ImU8String pathB, float targetBlend, float dur, ImAnimEaseDesc pathEase, ImAnimEaseDesc morphEase, ImAnimPolicy policy, float dt)
+    {
+        return TweenPathMorph(id.GetId(), channelId.GetId(), pathA.GetId(), pathB.GetId(), targetBlend, dur, pathEase, morphEase, policy, dt);
+    }
+
+    /// <inheritdoc cref="TweenPathMorph(uint, uint, uint, uint, float, float, ImAnimEaseDesc, ImAnimEaseDesc, ImAnimPolicy, float)"/>
     public static Vector2 TweenPathMorph(uint id, uint channelId, uint pathA, uint pathB, float targetBlend, float dur, ImAnimEaseDesc pathEase, ImAnimEaseDesc morphEase, ImAnimPolicy policy, float dt, ImAnimMorphOpts opts)
     {
         Vector2 ret = default;
         ImAnimNative.TweenPathMorph(&ret, id, channelId, pathA, pathB, targetBlend, dur, &pathEase, &morphEase, policy, dt, &opts);
         return ret;
+    }
+
+    /// <inheritdoc cref="TweenPathMorph(uint, uint, uint, uint, float, float, ImAnimEaseDesc, ImAnimEaseDesc, ImAnimPolicy, float, ImAnimMorphOpts)"/>
+    public static Vector2 TweenPathMorph(ImU8String id, ImU8String channelId, ImU8String pathA, ImU8String pathB, float targetBlend, float dur, ImAnimEaseDesc pathEase, ImAnimEaseDesc morphEase, ImAnimPolicy policy, float dt, ImAnimMorphOpts opts)
+    {
+        return TweenPathMorph(id.GetId(), channelId.GetId(), pathA.GetId(), pathB.GetId(), targetBlend, dur, pathEase, morphEase, policy, dt, opts);
     }
 
     /// <summary>
@@ -1268,6 +1678,12 @@ public static unsafe class ImAnim
     public static float GetMorphBlend(uint id, uint channelId)
     {
         return ImAnimNative.GetMorphBlend(id, channelId);
+    }
+
+    /// <inheritdoc cref="GetMorphBlend(uint, uint)"/>
+    public static float GetMorphBlend(ImU8String id, ImU8String channelId)
+    {
+        return GetMorphBlend(id.GetId(), channelId.GetId());
     }
 
 
@@ -1286,11 +1702,23 @@ public static unsafe class ImAnim
     }
 
     /// <inheritdoc cref="TextPath(uint, ImU8String)"/>
+    public static void TextPath(ImU8String pathId, ImU8String text)
+    {
+        TextPath(pathId.GetId(), text);
+    }
+
+    /// <inheritdoc cref="TextPath(uint, ImU8String)"/>
     public static void TextPath(uint pathId, ImU8String text, ImAnimTextPathOpts opts)
     {
         fixed (byte* textPtr = &text.GetPinnableNullTerminatedReference())
             ImAnimNative.TextPath(pathId, textPtr, &opts);
         text.Recycle();
+    }
+
+    /// <inheritdoc cref="TextPath(uint, ImU8String, ImAnimTextPathOpts)"/>
+    public static void TextPath(ImU8String pathId, ImU8String text, ImAnimTextPathOpts opts)
+    {
+        TextPath(pathId.GetId(), text, opts);
     }
 
     /// <summary>
@@ -1304,11 +1732,23 @@ public static unsafe class ImAnim
     }
 
     /// <inheritdoc cref="TextPathAnimated(uint, ImU8String, float)"/>
+    public static void TextPathAnimated(ImU8String pathId, ImU8String text, float progress)
+    {
+        TextPathAnimated(pathId.GetId(), text, progress);
+    }
+
+    /// <inheritdoc cref="TextPathAnimated(uint, ImU8String, float)"/>
     public static void TextPathAnimated(uint pathId, ImU8String text, float progress, ImAnimTextPathOpts opts)
     {
         fixed (byte* textPtr = &text.GetPinnableNullTerminatedReference())
             ImAnimNative.TextPathAnimated(pathId, textPtr, progress, &opts);
         text.Recycle();
+    }
+
+    /// <inheritdoc cref="TextPathAnimated(uint, ImU8String, float, ImAnimTextPathOpts)"/>
+    public static void TextPathAnimated(ImU8String pathId, ImU8String text, float progress, ImAnimTextPathOpts opts)
+    {
+        TextPathAnimated(pathId.GetId(), text, progress, opts);
     }
 
     /// <summary>
@@ -1370,11 +1810,23 @@ public static unsafe class ImAnim
     }
 
     /// <inheritdoc cref="TextStagger(uint, ImU8String, float)"/>
+    public static void TextStagger(ImU8String id, ImU8String text, float progress)
+    {
+        TextStagger(id.GetId(), text, progress);
+    }
+
+    /// <inheritdoc cref="TextStagger(uint, ImU8String, float)"/>
     public static void TextStagger(uint id, ImU8String text, float progress, ImAnimTextStaggerOpts opts)
     {
         fixed (byte* textPtr = &text.GetPinnableNullTerminatedReference())
             ImAnimNative.TextStagger(id, textPtr, progress, &opts);
         text.Recycle();
+    }
+
+    /// <inheritdoc cref="TextStagger(uint, ImU8String, float, ImAnimTextStaggerOpts)"/>
+    public static void TextStagger(ImU8String id, ImU8String text, float progress, ImAnimTextStaggerOpts opts)
+    {
+        TextStagger(id.GetId(), text, progress, opts);
     }
 
     /// <summary>
@@ -1466,6 +1918,12 @@ public static unsafe class ImAnim
         return ImAnimNative.NoiseChannelFloat(id, frequency, amplitude, &opts, dt);
     }
 
+    /// <inheritdoc cref="NoiseChannelFloat(uint, float, float, ImAnimNoiseOpts, float)"/>
+    public static float NoiseChannelFloat(ImU8String id, float frequency, float amplitude, ImAnimNoiseOpts opts, float dt)
+    {
+        return NoiseChannelFloat(id.GetId(), frequency, amplitude, opts, dt);
+    }
+
     /// <summary>
     /// 2D animated noise
     /// </summary>
@@ -1474,6 +1932,12 @@ public static unsafe class ImAnim
         Vector2 ret = default;
         ImAnimNative.NoiseChannelVec2(&ret, id, &frequency, &amplitude, &opts, dt);
         return ret;
+    }
+
+    /// <inheritdoc cref="NoiseChannelVec2(uint, Vector2, Vector2, ImAnimNoiseOpts, float)"/>
+    public static Vector2 NoiseChannelVec2(ImU8String id, Vector2 frequency, Vector2 amplitude, ImAnimNoiseOpts opts, float dt)
+    {
+        return NoiseChannelVec2(id.GetId(), frequency, amplitude, opts, dt);
     }
 
     /// <summary>
@@ -1486,6 +1950,12 @@ public static unsafe class ImAnim
         return ret;
     }
 
+    /// <inheritdoc cref="NoiseChannelVec4(uint, Vector4, Vector4, ImAnimNoiseOpts, float)"/>
+    public static Vector4 NoiseChannelVec4(ImU8String id, Vector4 frequency, Vector4 amplitude, ImAnimNoiseOpts opts, float dt)
+    {
+        return NoiseChannelVec4(id.GetId(), frequency, amplitude, opts, dt);
+    }
+
     /// <summary>
     /// Animated color noise in specified color space
     /// </summary>
@@ -1494,6 +1964,12 @@ public static unsafe class ImAnim
         Vector4 ret = default;
         ImAnimNative.NoiseChannelColor(&ret, id, &baseColor, &amplitude, frequency, &opts, colorSpace, dt);
         return ret;
+    }
+
+    /// <inheritdoc cref="NoiseChannelColor(uint, Vector4, Vector4, float, ImAnimNoiseOpts, ImAnimColorSpace, float)"/>
+    public static Vector4 NoiseChannelColor(ImU8String id, Vector4 baseColor, Vector4 amplitude, float frequency, ImAnimNoiseOpts opts, ImAnimColorSpace colorSpace, float dt)
+    {
+        return NoiseChannelColor(id.GetId(), baseColor, amplitude, frequency, opts, colorSpace, dt);
     }
 
     // Convenience: smooth random movement (like wiggle but using noise)
@@ -1506,6 +1982,12 @@ public static unsafe class ImAnim
         return ImAnimNative.SmoothNoiseFloat(id, amplitude, speed, dt);
     }
 
+    /// <inheritdoc cref="SmoothNoiseFloat(uint, float, float, float)"/>
+    public static float SmoothNoiseFloat(ImU8String id, float amplitude, float speed, float dt)
+    {
+        return SmoothNoiseFloat(id.GetId(), amplitude, speed, dt);
+    }
+
     /// <summary>
     /// Simple 2D smooth noise
     /// </summary>
@@ -1514,6 +1996,12 @@ public static unsafe class ImAnim
         Vector2 ret = default;
         ImAnimNative.SmoothNoiseVec2(&ret, id, &amplitude, speed, dt);
         return ret;
+    }
+
+    /// <inheritdoc cref="SmoothNoiseFloat(uint, float, float, float)"/>
+    public static Vector2 SmoothNoiseVec2(ImU8String id, Vector2 amplitude, float speed, float dt)
+    {
+        return SmoothNoiseVec2(id.GetId(), amplitude, speed, dt);
     }
 
     /// <summary>
@@ -1526,6 +2014,12 @@ public static unsafe class ImAnim
         return ret;
     }
 
+    /// <inheritdoc cref="SmoothNoiseVec4(uint, Vector4, float, float)"/>
+    public static Vector4 SmoothNoiseVec4(ImU8String id, Vector4 amplitude, float speed, float dt)
+    {
+        return SmoothNoiseVec4(id.GetId(), amplitude, speed, dt);
+    }
+
     /// <summary>
     /// Smooth noise for colors in specified color space
     /// </summary>
@@ -1534,6 +2028,12 @@ public static unsafe class ImAnim
         Vector4 ret = default;
         ImAnimNative.SmoothNoiseColor(&ret, id, &baseColor, &amplitude, speed, colorSpace, dt);
         return ret;
+    }
+
+    /// <inheritdoc cref="SmoothNoiseColor(uint, Vector4, Vector4, float, ImAnimColorSpace, float)"/>
+    public static Vector4 SmoothNoiseColor(ImU8String id, Vector4 baseColor, Vector4 amplitude, float speed, ImAnimColorSpace colorSpace, float dt)
+    {
+        return SmoothNoiseColor(id.GetId(), baseColor, amplitude, speed, colorSpace, dt);
     }
 
 
@@ -1551,12 +2051,24 @@ public static unsafe class ImAnim
         ImAnimNative.StyleRegister(styleId, style);
     }
 
+    /// <inheritdoc cref="StyleRegister(uint, ImGuiStylePtr)"/>
+    public static void StyleRegister(ImU8String styleId, ImGuiStylePtr style)
+    {
+        StyleRegister(styleId.GetId(), style);
+    }
+
     /// <summary>
     /// Register current ImGui style
     /// </summary>
     public static void StyleRegisterCurrent(uint styleId)
     {
         ImAnimNative.StyleRegisterCurrent(styleId);
+    }
+
+    /// <inheritdoc cref="StyleRegisterCurrent(uint)"/>
+    public static void StyleRegisterCurrent(ImU8String styleId)
+    {
+        StyleRegisterCurrent(styleId.GetId());
     }
 
     /// <summary>
@@ -1568,12 +2080,24 @@ public static unsafe class ImAnim
         ImAnimNative.StyleBlend(styleA, styleB, t, colorSpace);
     }
 
+    /// <inheritdoc cref="StyleBlend(uint, uint, float, ImAnimColorSpace)"/>
+    public static void StyleBlend(ImU8String styleA, ImU8String styleB, float t, ImAnimColorSpace colorSpace = ImAnimColorSpace.Oklab)
+    {
+        StyleBlend(styleA.GetId(), styleB.GetId(), t, colorSpace);
+    }
+
     /// <summary>
     /// Tween between styles over time
     /// </summary>
     public static void StyleTween(uint id, uint targetStyle, float duration, ImAnimEaseDesc ease, ImAnimColorSpace colorSpace, float dt)
     {
         ImAnimNative.StyleTween(id, targetStyle, duration, &ease, colorSpace, dt);
+    }
+
+    /// <inheritdoc cref="StyleTween(uint, uint, float, ImAnimEaseDesc, ImAnimColorSpace, float)"/>
+    public static void StyleTween(ImU8String id, uint targetStyle, float duration, ImAnimEaseDesc ease, ImAnimColorSpace colorSpace, float dt)
+    {
+        StyleTween(id.GetId(), targetStyle, duration, ease, colorSpace, dt);
     }
 
     /// <summary>
@@ -1586,6 +2110,12 @@ public static unsafe class ImAnim
         return ret;
     }
 
+    /// <inheritdoc cref="StyleBlendTo(uint, uint, float, ImAnimColorSpace)"/>
+    public static ImGuiStyle StyleBlendTo(ImU8String styleA, ImU8String styleB, float t, ImAnimColorSpace colorSpace = ImAnimColorSpace.Oklab)
+    {
+        return StyleBlendTo(styleA.GetId(), styleB.GetId(), t, colorSpace);
+    }
+
     /// <summary>
     /// Check if a style is registered
     /// </summary>
@@ -1594,12 +2124,24 @@ public static unsafe class ImAnim
         return ImAnimNative.StyleExists(styleId) == 1;
     }
 
+    /// <inheritdoc cref="StyleExists(uint)"/>
+    public static bool StyleExists(ImU8String styleId)
+    {
+        return StyleExists(styleId.GetId());
+    }
+
     /// <summary>
     /// Remove a registered style
     /// </summary>
     public static void StyleUnregister(uint styleId)
     {
         ImAnimNative.StyleUnregister(styleId);
+    }
+
+    /// <inheritdoc cref="StyleUnregister(uint)"/>
+    public static void StyleUnregister(ImU8String styleId)
+    {
+        StyleUnregister(styleId.GetId());
     }
 
 
@@ -1627,6 +2169,12 @@ public static unsafe class ImAnim
         return ret;
     }
 
+    /// <inheritdoc cref="TweenGradient(uint, uint, ImAnimGradient, float, ImAnimEaseDesc, ImAnimPolicy, ImAnimColorSpace, float)"/>
+    public static ImAnimGradient TweenGradient(ImU8String id, ImU8String channelId, ImAnimGradient target, float dur, ImAnimEaseDesc ez, ImAnimPolicy policy, ImAnimColorSpace colorSpace, float dt)
+    {
+        return TweenGradient(id.GetId(), channelId.GetId(), target, dur, ez, policy, colorSpace, dt);
+    }
+
 
     // ----------------------------------------------------
     // Transform Interpolation - animate 2D transforms
@@ -1650,6 +2198,12 @@ public static unsafe class ImAnim
         ImAnimTransform ret = default;
         ImAnimNative.TweenTransform(&ret, id, channelId, &target, dur, &ez, policy, rotationMode, dt);
         return ret;
+    }
+
+    /// <inheritdoc cref="TweenTransform(uint, uint, ImAnimTransform, float, ImAnimEaseDesc, ImAnimPolicy, int, float)"/>
+    public static ImAnimTransform TweenTransform(ImU8String id, ImU8String channelId, ImAnimTransform target, float dur, ImAnimEaseDesc ez, ImAnimPolicy policy, int rotationMode, float dt)
+    {
+        return TweenTransform(id.GetId(), channelId.GetId(), target, dur, ez, policy, rotationMode, dt);
     }
 
     /// <summary>
@@ -1693,6 +2247,12 @@ public static unsafe class ImAnim
         ImAnimClip ret = default;
         ImAnimNative.ClipBegin(&ret, clipId);
         return ret;
+    }
+
+    /// <inheritdoc cref="ClipBegin(uint)"/>
+    public static ImAnimClip ClipBegin(ImU8String clipId)
+    {
+        return ClipBegin(clipId.GetId());
     }
 
 
@@ -1739,6 +2299,12 @@ public static unsafe class ImAnim
         return ret;
     }
 
+    /// <inheritdoc cref="Play(uint, uint)"/>
+    public static ImAnimInstance Play(ImU8String clipId, uint instanceId)
+    {
+        return Play(clipId.GetId(), instanceId);
+    }
+
     /// <summary>
     /// Get an existing instance (returns invalid iam_instance if not found)
     /// </summary>
@@ -1747,6 +2313,12 @@ public static unsafe class ImAnim
         ImAnimInstance ret = default;
         ImAnimNative.GetInstance(&ret, instanceId);
         return ret;
+    }
+
+    /// <inheritdoc cref="GetInstance(uint)"/>
+    public static ImAnimInstance GetInstance(ImU8String instanceId)
+    {
+        return GetInstance(instanceId.GetId());
     }
 
     // Query clip info
@@ -1759,12 +2331,24 @@ public static unsafe class ImAnim
         return ImAnimNative.ClipDuration(clipId);
     }
 
+    /// <inheritdoc cref="ClipDuration(uint)"/>
+    public static float ClipDuration(ImU8String clipId)
+    {
+        return ClipDuration(clipId.GetId());
+    }
+
     /// <summary>
     /// Check if clip exists.
     /// </summary>
-    public static byte ClipExists(uint clipId)
+    public static bool ClipExists(uint clipId)
     {
-        return ImAnimNative.ClipExists(clipId);
+        return ImAnimNative.ClipExists(clipId) == 1;
+    }
+
+    /// <inheritdoc cref="ClipExists(uint)"/>
+    public static bool ClipExists(ImU8String clipId)
+    {
+        return ClipExists(clipId.GetId());
     }
 
     // Stagger helpers - compute delay for indexed instances
@@ -1777,6 +2361,12 @@ public static unsafe class ImAnim
         return ImAnimNative.StaggerDelay(clipId, index);
     }
 
+    /// <inheritdoc cref="StaggerDelay(uint, int)"/>
+    public static float StaggerDelay(ImU8String clipId, int index)
+    {
+        return StaggerDelay(clipId.GetId(), index);
+    }
+
     /// <summary>
     /// Play with stagger delay applied.
     /// </summary>
@@ -1787,6 +2377,12 @@ public static unsafe class ImAnim
         return ret;
     }
 
+    /// <inheritdoc cref="PlayStagger(uint, uint, int)"/>
+    public static ImAnimInstance PlayStagger(ImU8String clipId, ImU8String instanceId, int index)
+    {
+        return PlayStagger(clipId.GetId(), instanceId.GetId(), index);
+    }
+
     // Layering support - blend multiple animation instances
 
     /// <summary>
@@ -1795,6 +2391,12 @@ public static unsafe class ImAnim
     public static void LayerBegin(uint instanceId)
     {
         ImAnimNative.LayerBegin(instanceId);
+    }
+
+    /// <inheritdoc cref="LayerBegin(uint)"/>
+    public static void LayerBegin(ImU8String instanceId)
+    {
+        LayerBegin(instanceId.GetId());
     }
 
     /// <summary>
@@ -1813,6 +2415,12 @@ public static unsafe class ImAnim
         ImAnimNative.LayerEnd(instanceId);
     }
 
+    /// <inheritdoc cref="LayerEnd(uint)"/>
+    public static void LayerEnd(ImU8String instanceId)
+    {
+        LayerEnd(instanceId.GetId());
+    }
+
     /// <summary>
     /// Get blended float value.
     /// </summary>
@@ -1820,6 +2428,12 @@ public static unsafe class ImAnim
     {
         fixed (float* outVal = &value)
             return ImAnimNative.GetBlendedFloat(instanceId, channel, outVal) == 1;
+    }
+
+    /// <inheritdoc cref="GetBlendedFloat(uint, uint, out float)"/>
+    public static bool GetBlendedFloat(ImU8String instanceId, ImU8String channel, out float value)
+    {
+        return GetBlendedFloat(instanceId.GetId(), channel.GetId(), out value);
     }
 
     /// <summary>
@@ -1831,6 +2445,12 @@ public static unsafe class ImAnim
             return ImAnimNative.GetBlendedVec2(instanceId, channel, outVal) == 1;
     }
 
+    /// <inheritdoc cref="GetBlendedVec2(uint, uint, out Vector2)"/>
+    public static bool GetBlendedVec2(ImU8String instanceId, ImU8String channel, out Vector2 value)
+    {
+        return GetBlendedVec2(instanceId.GetId(), channel.GetId(), out value);
+    }
+
     /// <summary>
     /// Get blended vec4 value.
     /// </summary>
@@ -1838,6 +2458,12 @@ public static unsafe class ImAnim
     {
         fixed (Vector4* outVal = &value)
             return ImAnimNative.GetBlendedVec4(instanceId, channel, outVal) == 1;
+    }
+
+    /// <inheritdoc cref="GetBlendedVec4(uint, uint, out Vector4)"/>
+    public static bool GetBlendedVec4(ImU8String instanceId, ImU8String channel, out Vector4 value)
+    {
+        return GetBlendedVec4(instanceId.GetId(), channel.GetId(), out value);
     }
 
     /// <summary>
@@ -1849,7 +2475,20 @@ public static unsafe class ImAnim
             return ImAnimNative.GetBlendedInt(instanceId, channel, outVal) == 1;
     }
 
+    /// <inheritdoc cref="GetBlendedInt(uint, uint, out int)"/>
+    public static bool GetBlendedInt(ImU8String instanceId, ImU8String channel, out int value)
+    {
+        return GetBlendedInt(instanceId.GetId(), channel.GetId(), out value);
+    }
+
     // Persistence (optional)
+
+    public static void SetConfigDirectory(ImU8String path)
+    {
+        fixed (byte* pPath = &path.GetPinnableNullTerminatedReference())
+            ImAnimNative.SetConfigDirectory(pPath);
+        path.Recycle();
+    }
 
     public static ImAnimResult ClipSave(uint clipId, ImU8String path)
     {
@@ -1858,6 +2497,11 @@ public static unsafe class ImAnim
             ret = ImAnimNative.ClipSave(clipId, pathPtr);
         path.Recycle();
         return ret;
+    }
+
+    public static ImAnimResult ClipSave(ImU8String clipId, ImU8String path)
+    {
+        return ClipSave(clipId.GetId(), path);
     }
 
     public static ImAnimResult ClipLoad(ImU8String path, out uint clipId)

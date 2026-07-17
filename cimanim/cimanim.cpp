@@ -452,5 +452,6 @@ CIMGUI_API bool   c_iam_get_blended_vec4(ImGuiID instance_id, ImGuiID channel, I
 CIMGUI_API bool   c_iam_get_blended_int(ImGuiID instance_id, ImGuiID channel, int* out) { return iam_get_blended_int(instance_id, channel, out); }
 
 // Persistence (optional)
+CIMGUI_API void       c_iam_set_config_directory(const char* path) { iam_set_config_directory(path); }
 CIMGUI_API iam_result c_iam_clip_save(ImGuiID clip_id, char const* path) { return iam_clip_save(clip_id, path); }
 CIMGUI_API iam_result c_iam_clip_load(char const* path, ImGuiID* out_clip_id) { return iam_clip_load(path, out_clip_id); }

@@ -1,5 +1,6 @@
 using System.Numerics;
 using System.Runtime.InteropServices;
+using Dalamud.Bindings.ImGui;
 
 namespace ImAnimSharp;
 
@@ -74,6 +75,12 @@ public unsafe struct ImAnimInstance
         return ret;
     }
 
+    /// <inheritdoc cref="Then(uint)"/>
+    public ImAnimInstance Then(ImU8String nextClipId)
+    {
+        return Then(nextClipId.GetId());
+    }
+
     /// <summary>
     /// Chain with specific instance ID.
     /// </summary>
@@ -83,6 +90,12 @@ public unsafe struct ImAnimInstance
         fixed (ImAnimInstance* @this = &this)
             ImAnimNative.InstanceThenId(&ret, @this, nextClipId, nextInstanceId);
         return ret;
+    }
+
+    /// <inheritdoc cref="Then(uint, uint)"/>
+    public ImAnimInstance Then(ImU8String nextClipId, ImU8String nextInstanceId)
+    {
+        return Then(nextClipId.GetId(), nextInstanceId.GetId());
     }
 
     /// <summary>
@@ -131,11 +144,21 @@ public unsafe struct ImAnimInstance
             return ImAnimNative.InstanceGetFloat(@this, channel, outVal) == 1;
     }
 
+    public bool GetFloat(ImU8String channel, out float value)
+    {
+        return GetFloat(channel.GetId(), out value);
+    }
+
     public bool GetVec2(uint channel, out Vector2 value)
     {
         fixed (ImAnimInstance* @this = &this)
         fixed (Vector2* outVal = &value)
             return ImAnimNative.InstanceGetVec2(@this, channel, outVal) == 1;
+    }
+
+    public bool GetVec2(ImU8String channel, out Vector2 value)
+    {
+        return GetVec2(channel.GetId(), out value);
     }
 
     public bool GetVec4(uint channel, out Vector4 value)
@@ -145,11 +168,21 @@ public unsafe struct ImAnimInstance
             return ImAnimNative.InstanceGetVec4(@this, channel, outVal) == 1;
     }
 
+    public bool GetVec4(ImU8String channel, out Vector4 value)
+    {
+        return GetVec4(channel.GetId(), out value);
+    }
+
     public bool GetInt(uint channel, out int value)
     {
         fixed (ImAnimInstance* @this = &this)
         fixed (int* outVal = &value)
             return ImAnimNative.InstanceGetInt(@this, channel, outVal) == 1;
+    }
+
+    public bool GetInt(ImU8String channel, out int value)
+    {
+        return GetInt(channel.GetId(), out value);
     }
 
     /// <summary>
@@ -160,6 +193,12 @@ public unsafe struct ImAnimInstance
         fixed (ImAnimInstance* @this = &this)
         fixed (Vector4* outVal = &value)
             return ImAnimNative.InstanceGetColor(@this, channel, outVal, colorSpace) == 1;
+    }
+
+    /// <inheritdoc cref="GetColor(uint, out Vector4, ImAnimColorSpace)"/>
+    public bool GetColor(ImU8String channel, out Vector4 value, ImAnimColorSpace colorSpace = ImAnimColorSpace.Oklab)
+    {
+        return GetColor(channel.GetId(), out value, colorSpace);
     }
 
     // Check validity
