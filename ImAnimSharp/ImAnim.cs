@@ -121,9 +121,9 @@ public static unsafe class ImAnim
     /// <summary>
     /// Check if lazy init is enabled.
     /// </summary>
-    public static byte IsLazyInitEnabled()
+    public static bool IsLazyInitEnabled()
     {
-        return ImAnimNative.IsLazyInitEnabled();
+        return ImAnimNative.IsLazyInitEnabled() == 1;
     }
 
     /// <summary>
@@ -207,9 +207,9 @@ public static unsafe class ImAnim
     /// <summary>
     /// Check if profiler is enabled.
     /// </summary>
-    public static byte ProfilerIsEnabled()
+    public static bool ProfilerIsEnabled()
     {
-        return ImAnimNative.ProfilerIsEnabled();
+        return ImAnimNative.ProfilerIsEnabled() == 1;
     }
 
     /// <summary>
@@ -2298,9 +2298,9 @@ public static unsafe class ImAnim
     }
 
     /// <inheritdoc cref="Play(uint, uint)"/>
-    public static ImAnimInstance Play(ImU8String clipId, uint instanceId)
+    public static ImAnimInstance Play(ImU8String clipId, ImU8String instanceId)
     {
-        return Play(clipId.GetId(), instanceId);
+        return Play(clipId.GetId(), instanceId.GetId());
     }
 
     /// <summary>
