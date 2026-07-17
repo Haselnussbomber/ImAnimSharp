@@ -283,6 +283,9 @@ CIMGUI_API void   c_iam_style_unregister(ImGuiID style_id) { iam_style_unregiste
 // Gradient Interpolation - animate between color gradients
 // ----------------------------------------------------
 
+CIMGUI_API void   c_iam_gradient_add(iam_gradient* self, float position, ImVec4* color) { self->add(position, *color); }
+CIMGUI_API void   c_iam_gradient_sample(ImVec4* pOut, iam_gradient* self, float t, int color_space) { *pOut = self->sample(t, color_space); }
+
 // Blend between two gradients
 CIMGUI_API void   c_iam_gradient_lerp(iam_gradient* pOut, iam_gradient* a, iam_gradient* b, float t, int color_space) { *pOut = iam_gradient_lerp(*a, *b, t, color_space); }
 

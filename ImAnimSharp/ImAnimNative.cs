@@ -526,6 +526,12 @@ public static unsafe partial class ImAnimNative
     // Gradient Interpolation - animate between color gradients
     // ----------------------------------------------------
 
+    [LibraryImport(LibName, EntryPoint = "c_iam_gradient_add")]
+    public static partial void GradientAdd(ImAnimGradient* self, float position, Vector4* color);
+
+    [LibraryImport(LibName, EntryPoint = "c_iam_gradient_sample")]
+    public static partial void GradientSample(Vector4* pOut, ImAnimGradient* self, float t, ImAnimColorSpace colorSpace = ImAnimColorSpace.Oklab);
+
     // Blend between two gradients
     [LibraryImport(LibName, EntryPoint = "c_iam_gradient_lerp")]
     public static partial void GradientLerp(ImAnimGradient* pOut, ImAnimGradient* a, ImAnimGradient* b, float t, ImAnimColorSpace colorSpace = ImAnimColorSpace.Oklab);
