@@ -9,7 +9,7 @@ namespace ImAnimSharp;
 /// Text path options (<see href="https://github.com/soufianekhiat/ImAnim/blob/0e28f285/docs/text-along-paths.md">Docs</see>)
 /// </summary>
 [StructLayout(LayoutKind.Sequential)]
-public struct ImAnimTextPathOpts
+public struct ImAnimTextPathOpts()
 {
     /// <summary>
     /// Screen-space origin for rendering (path coords are offset by this)
@@ -39,7 +39,7 @@ public struct ImAnimTextPathOpts
     /// <summary>
     /// Text color (default: white)
     /// </summary>
-    public uint Color;
+    public uint Color = 0xFFFFFFFF;
 
     /// <summary>
     /// Font to use (nullptr = current font)
@@ -49,7 +49,5 @@ public struct ImAnimTextPathOpts
     /// <summary>
     /// Additional font scale (1.0 = normal)
     /// </summary>
-    public float FontScale;
-
-    public static ImAnimTextPathOpts Default() => new() { Color = 0xFFFFFFFF, FontScale = 1.0f };
+    public float FontScale = 1.0f;
 }

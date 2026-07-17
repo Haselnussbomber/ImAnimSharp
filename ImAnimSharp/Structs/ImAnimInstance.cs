@@ -7,21 +7,11 @@ namespace ImAnimSharp;
 /// Playback control for a clip
 /// </summary>
 [StructLayout(LayoutKind.Sequential)]
-public unsafe struct ImAnimInstance
+public unsafe struct ImAnimInstance(uint instId)
 {
-    public uint InstId;
+    public uint InstId = instId;
 
     // Playback control
-
-    public static ImAnimInstance Create()
-    {
-        return new ImAnimInstance();
-    }
-
-    public static ImAnimInstance Create(uint instId)
-    {
-        return new ImAnimInstance() { InstId = instId };
-    }
 
     public void Pause()
     {

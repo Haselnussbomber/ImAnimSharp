@@ -7,29 +7,22 @@ namespace ImAnimSharp;
 /// 2D transform (position, rotation, scale) (<see href="https://github.com/soufianekhiat/ImAnim/blob/0e28f285/docs/transforms.md">Docs</see>)
 /// </summary>
 [StructLayout(LayoutKind.Sequential)]
-public unsafe struct ImAnimTransform
+public unsafe struct ImAnimTransform()
 {
     /// <summary>
     /// Translation
     /// </summary>
-    public Vector2 Position;
+    public Vector2 Position = Vector2.Zero;
 
     /// <summary>
     /// Scale (1,1 = identity)
     /// </summary>
-    public Vector2 Scale;
+    public Vector2 Scale = Vector2.One;
 
     /// <summary>
     /// Rotation in radians
     /// </summary>
-    public float Rotation;
-
-    public static ImAnimTransform Identity() => new()
-    {
-        Position = Vector2.Zero,
-        Scale = Vector2.One,
-        Rotation = 0,
-    };
+    public float Rotation = 0;
 
     /// <summary>
     /// Apply transform to a point

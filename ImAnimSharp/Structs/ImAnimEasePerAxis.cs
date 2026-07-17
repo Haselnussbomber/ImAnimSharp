@@ -28,19 +28,24 @@ public struct ImAnimEasePerAxis
     /// </summary>
     public ImAnimEaseDesc W;
 
-    public static ImAnimEasePerAxis From(ImAnimEaseDesc all) => new()
+    public ImAnimEasePerAxis()
     {
-        X = all,
-        Y = all,
-        Z = all,
-        W = all
-    };
 
-    public static ImAnimEasePerAxis From(ImAnimEaseDesc ex, ImAnimEaseDesc ey) => new()
+    }
+
+    public ImAnimEasePerAxis(ImAnimEaseDesc all)
     {
-        X = ex,
-        Y = ey,
-        Z = new ImAnimEaseDesc { Type = ImAnimEaseType.Linear },
-        W = new ImAnimEaseDesc { Type = ImAnimEaseType.Linear }
-    };
+        X = all;
+        Y = all;
+        Z = all;
+        W = all;
+    }
+
+    public ImAnimEasePerAxis(ImAnimEaseDesc ex, ImAnimEaseDesc ey)
+    {
+        X = ex;
+        Y = ey;
+        Z = new ImAnimEaseDesc { Type = ImAnimEaseType.Linear };
+        W = new ImAnimEaseDesc { Type = ImAnimEaseType.Linear };
+    }
 }

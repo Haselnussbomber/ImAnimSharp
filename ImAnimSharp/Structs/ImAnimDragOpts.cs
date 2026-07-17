@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 namespace ImAnimSharp;
 
 [StructLayout(LayoutKind.Sequential)]
-public unsafe struct ImAnimDragOpts
+public unsafe struct ImAnimDragOpts()
 {
     /// <summary>
     /// Grid size for snapping (0,0 = no grid)
@@ -24,7 +24,7 @@ public unsafe struct ImAnimDragOpts
     /// <summary>
     /// Duration of snap animation
     /// </summary>
-    public float SnapDuration;
+    public float SnapDuration = 0.2f;
 
     /// <summary>
     /// Overshoot amount (0 = none, 1 = normal)
@@ -34,7 +34,5 @@ public unsafe struct ImAnimDragOpts
     /// <summary>
     /// Easing type for snap animation
     /// </summary>
-    public ImAnimEaseType EaseType;
-
-    public static ImAnimDragOpts Default() => new() { SnapDuration = 0.2f, EaseType = ImAnimEaseType.OutCubic };
+    public ImAnimEaseType EaseType = ImAnimEaseType.OutCubic;
 }
