@@ -1,0 +1,55 @@
+using System.Numerics;
+using System.Runtime.InteropServices;
+
+using Dalamud.Bindings.ImGui;
+
+namespace ImAnimSharp;
+
+/// <summary>
+/// Text path options
+/// </summary>
+[StructLayout(LayoutKind.Sequential)]
+public struct ImAnimTextPathOpts
+{
+    /// <summary>
+    /// Screen-space origin for rendering (path coords are offset by this)
+    /// </summary>
+    public Vector2 Origin;
+
+    /// <summary>
+    /// Starting offset along path (pixels)
+    /// </summary>
+    public float Offset;
+
+    /// <summary>
+    /// Extra spacing between characters (pixels)
+    /// </summary>
+    public float LetterSpacing;
+
+    /// <summary>
+    /// ImAnimTextPathAlign value
+    /// </summary>
+    public ImAnimTextPathAlign Align;
+
+    /// <summary>
+    /// Flip text vertically (for paths going right-to-left)
+    /// </summary>
+    public bool FlipY;
+
+    /// <summary>
+    /// Text color (default: white)
+    /// </summary>
+    public uint Color;
+
+    /// <summary>
+    /// Font to use (nullptr = current font)
+    /// </summary>
+    public ImFontPtr Font;
+
+    /// <summary>
+    /// Additional font scale (1.0 = normal)
+    /// </summary>
+    public float FontScale;
+
+    public static ImAnimTextPathOpts Default() => new() { Color = 0xFFFFFFFF, FontScale = 1.0f };
+}

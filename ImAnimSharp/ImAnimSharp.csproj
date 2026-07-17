@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Dalamud.NET.Sdk/15.0.0">
+  <!-- Project settings -->
+  <PropertyGroup>
+    <Version>1.0.0</Version>
+    <PackageId>Dalamud.ImAnimSharp</PackageId>
+    <Authors>Haselnussbomber</Authors>
+    <PackageProjectUrl>https://github.com/Haselnussbomber/ImAnimSharp</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Haselnussbomber/ImAnimSharp.git</RepositoryUrl>
+    <RestorePackagesWithLockFile>false</RestorePackagesWithLockFile>
+    <DisableRuntimeMarshalling>true</DisableRuntimeMarshalling>
+    <NoWarn>$(NoWarn);IDE0130;CA1401</NoWarn>
+  </PropertyGroup>
+
+  <!-- Dalamud.NET.Sdk settings -->
+  <PropertyGroup>
+    <Use_DalamudPackager>false</Use_DalamudPackager>
+    <Use_Dalamud_FFXIVClientStructs>false</Use_Dalamud_FFXIVClientStructs>
+    <Use_Dalamud_Newtonsoft_Json>false</Use_Dalamud_Newtonsoft_Json>
+    <Use_Dalamud_Lumina>false</Use_Dalamud_Lumina>
+    <Use_Dalamud_Lumina_Excel>false</Use_Dalamud_Lumina_Excel>
+    <Use_Dalamud_Serilog>false</Use_Dalamud_Serilog>
+    <Use_Dalamud_MSObjectPool>false</Use_Dalamud_MSObjectPool>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None
+      Condition="Exists('..\build\windows\x64\releasedbg\cimanim.dll')"
+      Include="..\build\windows\x64\releasedbg\cimanim.dll"
+      Pack="true"
+      PackagePath="runtimes\win-x64\native" />
+    <None
+      Condition="Exists('..\build\windows\x64\releasedbg\cimanim.pdb')"
+      Include="..\build\windows\x64\releasedbg\cimanim.pdb"
+      Pack="true"
+      PackagePath="runtimes\win-x64\native" />
+  </ItemGroup>
+</Project>

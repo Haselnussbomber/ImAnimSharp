@@ -1,0 +1,26 @@
+using System.Numerics;
+using System.Runtime.InteropServices;
+
+namespace ImAnimSharp;
+
+/// <summary>
+/// 2D transform (position, rotation, scale)
+/// </summary>
+[StructLayout(LayoutKind.Sequential)]
+public struct ImAnimTransform
+{
+    /// <summary>
+    /// Translation
+    /// </summary>
+    public Vector2 Position;
+
+    /// <summary>
+    /// Scale (1,1 = identity)
+    /// </summary>
+    public Vector2 Scale;
+
+    /// <summary>
+    /// Rotation in radians
+    /// </summary>
+    public float Rotation;
+}
