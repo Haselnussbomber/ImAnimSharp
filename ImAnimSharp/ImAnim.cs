@@ -7,8 +7,6 @@ using Dalamud.Bindings.ImGui;
 
 namespace ImAnimSharp;
 
-// TODO: Helper functions for variations https://github.com/soufianekhiat/ImAnim/blob/0e28f285/docs/variations.md
-
 public static unsafe class ImAnim
 {
     public delegate void ClipCallback(uint instId, void* userData); // iam_clip_callback

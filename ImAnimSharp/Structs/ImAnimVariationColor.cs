@@ -21,6 +21,9 @@ public unsafe struct ImAnimVariationColor
     public ImAnimVariationFloat B;
     public ImAnimVariationFloat A;
 
+    /// <summary>
+    /// No variation
+    /// </summary>
     public static ImAnimVariationColor None => new()
     {
         Mode = ImAnimVariationMode.None,
@@ -36,6 +39,9 @@ public unsafe struct ImAnimVariationColor
         A = ImAnimVariationFloat.None,
     };
 
+    /// <summary>
+    /// Increment by amt
+    /// </summary>
     public static ImAnimVariationColor Inc(Vector4 color) => new()
     {
         Mode = ImAnimVariationMode.Increment,
@@ -51,6 +57,9 @@ public unsafe struct ImAnimVariationColor
         A = ImAnimVariationFloat.None,
     };
 
+    /// <summary>
+    /// Increment by amt
+    /// </summary>
     public static ImAnimVariationColor Inc(float r, float g, float b, float a) => new()
     {
         Mode = ImAnimVariationMode.Increment,
@@ -66,6 +75,9 @@ public unsafe struct ImAnimVariationColor
         A = ImAnimVariationFloat.None,
     };
 
+    /// <summary>
+    /// Decrement by amt
+    /// </summary>
     public static ImAnimVariationColor Dec(Vector4 color) => new()
     {
         Mode = ImAnimVariationMode.Decrement,
@@ -81,6 +93,9 @@ public unsafe struct ImAnimVariationColor
         A = ImAnimVariationFloat.None,
     };
 
+    /// <summary>
+    /// Decrement by amt
+    /// </summary>
     public static ImAnimVariationColor Dec(float r, float g, float b, float a) => new()
     {
         Mode = ImAnimVariationMode.Decrement,
@@ -96,21 +111,9 @@ public unsafe struct ImAnimVariationColor
         A = ImAnimVariationFloat.None,
     };
 
-    public static ImAnimVariationColor Mul(float f) => new()
-    {
-        Mode = ImAnimVariationMode.Multiply,
-        Amount = new Vector4(f, f, f, 1),
-        MinClamp = Vector4.Zero,
-        MaxClamp = Vector4.One,
-        ColorSpace = ImAnimColorSpace.Oklab,
-        Callback = null,
-        User = null,
-        R = ImAnimVariationFloat.None,
-        G = ImAnimVariationFloat.None,
-        B = ImAnimVariationFloat.None,
-        A = ImAnimVariationFloat.None,
-    };
-
+    /// <summary>
+    /// Random [-r, +r]
+    /// </summary>
     public static ImAnimVariationColor Rand(Vector4 acolort) => new()
     {
         Mode = ImAnimVariationMode.Random,
@@ -126,6 +129,27 @@ public unsafe struct ImAnimVariationColor
         A = ImAnimVariationFloat.None,
     };
 
+    /// <summary>
+    /// Random [-r, +r]
+    /// </summary>
+    public static ImAnimVariationColor Rand(float amt) => new()
+    {
+        Mode = ImAnimVariationMode.Random,
+        Amount = new Vector4(amt),
+        MinClamp = Vector4.Zero,
+        MaxClamp = Vector4.One,
+        ColorSpace = ImAnimColorSpace.Oklab,
+        Callback = null,
+        User = null,
+        R = ImAnimVariationFloat.None,
+        G = ImAnimVariationFloat.None,
+        B = ImAnimVariationFloat.None,
+        A = ImAnimVariationFloat.None,
+    };
+
+    /// <summary>
+    /// Random [-r, +r]
+    /// </summary>
     public static ImAnimVariationColor Rand(float r, float g, float b, float a) => new()
     {
         Mode = ImAnimVariationMode.Random,
@@ -141,6 +165,9 @@ public unsafe struct ImAnimVariationColor
         A = ImAnimVariationFloat.None,
     };
 
+    /// <summary>
+    /// Custom callback
+    /// </summary>
     public static ImAnimVariationColor Fn(ImAnim.VariationVec4Fn fn, void* userData = null) => new()
     {
         Mode = ImAnimVariationMode.Callback,
@@ -156,7 +183,10 @@ public unsafe struct ImAnimVariationColor
         A = ImAnimVariationFloat.None,
     };
 
-    public static ImAnimVariationColor Axis(ImAnimVariationFloat vr, ImAnimVariationFloat vg, ImAnimVariationFloat vb, ImAnimVariationFloat va) => new()
+    /// <summary>
+    /// Per-channel mode
+    /// </summary>
+    public static ImAnimVariationColor Channel(ImAnimVariationFloat vr, ImAnimVariationFloat vg, ImAnimVariationFloat vb, ImAnimVariationFloat va) => new()
     {
         Mode = ImAnimVariationMode.None,
         Amount = Vector4.Zero,
@@ -170,4 +200,14 @@ public unsafe struct ImAnimVariationColor
         B = vb,
         A = va,
     };
+
+    /// <summary>
+    /// Add clamp range
+    /// </summary>
+    public ImAnimVariationColor Clamp(Vector4 min, Vector4 max)
+    {
+        MinClamp = min;
+        MaxClamp = max;
+        return this;
+    }
 }

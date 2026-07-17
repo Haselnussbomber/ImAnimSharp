@@ -19,6 +19,9 @@ public unsafe struct ImAnimVariationVec2
     public ImAnimVariationFloat X;
     public ImAnimVariationFloat Y;
 
+    /// <summary>
+    /// No variation
+    /// </summary>
     public static ImAnimVariationVec2 None => new()
     {
         Mode = ImAnimVariationMode.None,
@@ -32,6 +35,9 @@ public unsafe struct ImAnimVariationVec2
         Y = ImAnimVariationFloat.None,
     };
 
+    /// <summary>
+    /// Increment by amt
+    /// </summary>
     public static ImAnimVariationVec2 Inc(Vector2 amt) => new()
     {
         Mode = ImAnimVariationMode.Increment,
@@ -45,6 +51,9 @@ public unsafe struct ImAnimVariationVec2
         Y = ImAnimVariationFloat.None,
     };
 
+    /// <summary>
+    /// Increment by amt
+    /// </summary>
     public static ImAnimVariationVec2 Inc(float x, float y) => new()
     {
         Mode = ImAnimVariationMode.Increment,
@@ -58,6 +67,9 @@ public unsafe struct ImAnimVariationVec2
         Y = ImAnimVariationFloat.None,
     };
 
+    /// <summary>
+    /// Decrement by amt
+    /// </summary>
     public static ImAnimVariationVec2 Dec(Vector2 amt) => new()
     {
         Mode = ImAnimVariationMode.Decrement,
@@ -71,6 +83,9 @@ public unsafe struct ImAnimVariationVec2
         Y = ImAnimVariationFloat.None,
     };
 
+    /// <summary>
+    /// Decrement by amt
+    /// </summary>
     public static ImAnimVariationVec2 Dec(float x, float y) => new()
     {
         Mode = ImAnimVariationMode.Decrement,
@@ -84,6 +99,9 @@ public unsafe struct ImAnimVariationVec2
         Y = ImAnimVariationFloat.None,
     };
 
+    /// <summary>
+    /// Multiply by f
+    /// </summary>
     public static ImAnimVariationVec2 Mul(float f) => new()
     {
         Mode = ImAnimVariationMode.Multiply,
@@ -97,6 +115,9 @@ public unsafe struct ImAnimVariationVec2
         Y = ImAnimVariationFloat.None,
     };
 
+    /// <summary>
+    /// Multiply by f
+    /// </summary>
     public static ImAnimVariationVec2 Rand(Vector2 amt) => new()
     {
         Mode = ImAnimVariationMode.Random,
@@ -110,6 +131,9 @@ public unsafe struct ImAnimVariationVec2
         Y = ImAnimVariationFloat.None,
     };
 
+    /// <summary>
+    /// Random [-r, +r]
+    /// </summary>
     public static ImAnimVariationVec2 Rand(float x, float y) => new()
     {
         Mode = ImAnimVariationMode.Random,
@@ -123,7 +147,9 @@ public unsafe struct ImAnimVariationVec2
         Y = ImAnimVariationFloat.None,
     };
 
-    // TODO: iam_variation_vec2_fn
+    /// <summary>
+    /// Custom callback
+    /// </summary>
     public static ImAnimVariationVec2 Fn(ImAnim.VariationVec2Fn fn, void* userData = null) => new()
     {
         Mode = ImAnimVariationMode.Callback,
@@ -137,6 +163,9 @@ public unsafe struct ImAnimVariationVec2
         Y = ImAnimVariationFloat.None,
     };
 
+    /// <summary>
+    /// Per-axis mode (different variation per axis)
+    /// </summary>
     public static ImAnimVariationVec2 Axis(ImAnimVariationFloat vx, ImAnimVariationFloat vy) => new()
     {
         Mode = ImAnimVariationMode.None,
@@ -149,4 +178,14 @@ public unsafe struct ImAnimVariationVec2
         X = vx,
         Y = vy,
     };
+
+    /// <summary>
+    /// Add clamp range
+    /// </summary>
+    public ImAnimVariationVec2 Clamp(Vector2 min, Vector2 max)
+    {
+        MinClamp = min;
+        MaxClamp = max;
+        return this;
+    }
 }

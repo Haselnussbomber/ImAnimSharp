@@ -16,6 +16,9 @@ public unsafe struct ImAnimVariationFloat
     public delegate* unmanaged[Cdecl]<int, void*, float> Callback;
     public void* User;
 
+    /// <summary>
+    /// No variation
+    /// </summary>
     public static ImAnimVariationFloat None => new()
     {
         Mode = ImAnimVariationMode.None,
@@ -27,6 +30,9 @@ public unsafe struct ImAnimVariationFloat
         User = null
     };
 
+    /// <summary>
+    /// Increment by amt
+    /// </summary>
     public static ImAnimVariationFloat Inc(float amt) => new()
     {
         Mode = ImAnimVariationMode.Increment,
@@ -38,6 +44,9 @@ public unsafe struct ImAnimVariationFloat
         User = null
     };
 
+    /// <summary>
+    /// Decrement by amt
+    /// </summary>
     public static ImAnimVariationFloat Dec(float amt) => new()
     {
         Mode = ImAnimVariationMode.Decrement,
@@ -49,6 +58,9 @@ public unsafe struct ImAnimVariationFloat
         User = null
     };
 
+    /// <summary>
+    /// Multiply by f
+    /// </summary>
     public static ImAnimVariationFloat Mul(float f) => new()
     {
         Mode = ImAnimVariationMode.Multiply,
@@ -60,6 +72,9 @@ public unsafe struct ImAnimVariationFloat
         User = null
     };
 
+    /// <summary>
+    /// Random [-r, +r]
+    /// </summary>
     public static ImAnimVariationFloat Rand(float r) => new()
     {
         Mode = ImAnimVariationMode.Random,
@@ -71,6 +86,9 @@ public unsafe struct ImAnimVariationFloat
         User = null
     };
 
+    /// <summary>
+    /// Random [0, r]
+    /// </summary>
     public static ImAnimVariationFloat RandAbs(float r) => new()
     {
         Mode = ImAnimVariationMode.RandomAbs,
@@ -82,6 +100,9 @@ public unsafe struct ImAnimVariationFloat
         User = null
     };
 
+    /// <summary>
+    /// Alternate +/-
+    /// </summary>
     public static ImAnimVariationFloat PingPong(float amt) => new()
     {
         Mode = ImAnimVariationMode.PingPong,
@@ -93,6 +114,23 @@ public unsafe struct ImAnimVariationFloat
         User = null
     };
 
+    /// <summary>
+    /// Custom callback
+    /// </summary>
+    public static ImAnimVariationFloat Fn(ImAnim.VariationFloatFn fn) => new()
+    {
+        Mode = ImAnimVariationMode.Callback,
+        Amount = 0,
+        MinClamp = float.MinValue,
+        MaxClamp = float.MaxValue,
+        Seed = 0,
+        Callback = (delegate* unmanaged[Cdecl]<int, void*, float>)Marshal.GetFunctionPointerForDelegate(fn),
+        User = null
+    };
+
+    /// <summary>
+    /// Custom callback
+    /// </summary>
     public static ImAnimVariationFloat Fn(ImAnim.VariationFloatFn fn, void* userData = null) => new()
     {
         Mode = ImAnimVariationMode.Callback,
@@ -103,4 +141,14 @@ public unsafe struct ImAnimVariationFloat
         Callback = (delegate* unmanaged[Cdecl]<int, void*, float>)Marshal.GetFunctionPointerForDelegate(fn),
         User = userData
     };
+
+    /// <summary>
+    /// Add clamp range
+    /// </summary>
+    public ImAnimVariationFloat Clamp(float min, float max)
+    {
+        MinClamp = min;
+        MaxClamp = max;
+        return this;
+    }
 }

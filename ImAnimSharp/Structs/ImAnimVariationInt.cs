@@ -16,6 +16,9 @@ public unsafe struct ImAnimVariationInt
     public delegate* unmanaged[Cdecl]<int, void*, int> Callback;
     public void* User;
 
+    /// <summary>
+    /// No variation
+    /// </summary>
     public static ImAnimVariationInt None => new()
     {
         Mode = ImAnimVariationMode.None,
@@ -27,6 +30,9 @@ public unsafe struct ImAnimVariationInt
         User = null
     };
 
+    /// <summary>
+    /// Increment by amt
+    /// </summary>
     public static ImAnimVariationInt Inc(int amt) => new()
     {
         Mode = ImAnimVariationMode.Increment,
@@ -38,6 +44,9 @@ public unsafe struct ImAnimVariationInt
         User = null
     };
 
+    /// <summary>
+    /// Decrement by amt
+    /// </summary>
     public static ImAnimVariationInt Dec(int amt) => new()
     {
         Mode = ImAnimVariationMode.Decrement,
@@ -49,6 +58,9 @@ public unsafe struct ImAnimVariationInt
         User = null
     };
 
+    /// <summary>
+    /// Multiply by f
+    /// </summary>
     public static ImAnimVariationInt Mul(int f) => new()
     {
         Mode = ImAnimVariationMode.Multiply,
@@ -60,6 +72,9 @@ public unsafe struct ImAnimVariationInt
         User = null
     };
 
+    /// <summary>
+    /// Random [-r, +r]
+    /// </summary>
     public static ImAnimVariationInt Rand(int r) => new()
     {
         Mode = ImAnimVariationMode.Random,
@@ -71,6 +86,9 @@ public unsafe struct ImAnimVariationInt
         User = null
     };
 
+    /// <summary>
+    /// Random [0, r]
+    /// </summary>
     public static ImAnimVariationInt RandAbs(int r) => new()
     {
         Mode = ImAnimVariationMode.RandomAbs,
@@ -82,6 +100,9 @@ public unsafe struct ImAnimVariationInt
         User = null
     };
 
+    /// <summary>
+    /// Custom callback
+    /// </summary>
     public static ImAnimVariationInt Fn(ImAnim.VariationIntFn fn, void* userData = null) => new()
     {
         Mode = ImAnimVariationMode.Callback,
@@ -92,4 +113,14 @@ public unsafe struct ImAnimVariationInt
         Callback = (delegate* unmanaged[Cdecl]<int, void*, int>)Marshal.GetFunctionPointerForDelegate(fn),
         User = userData
     };
+
+    /// <summary>
+    /// Add clamp range
+    /// </summary>
+    public ImAnimVariationInt Clamp(int min, int max)
+    {
+        MinClamp = min;
+        MaxClamp = max;
+        return this;
+    }
 }
