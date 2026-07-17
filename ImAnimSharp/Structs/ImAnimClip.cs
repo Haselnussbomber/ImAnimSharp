@@ -14,7 +14,15 @@ public unsafe struct ImAnimClip
     public uint ClipId;
 
     /// <summary>
-    /// Start building a new clip with the given ID
+    /// Start building a new clip with the given ID.
+    /// </summary>
+    public static ImAnimClip Begin(ImU8String clipId)
+    {
+        return ImAnim.ClipBegin(ImGuiP.ImHashStr(clipId));
+    }
+
+    /// <summary>
+    /// Start building a new clip with the given ID.
     /// </summary>
     public static ImAnimClip Begin(uint clipId)
     {
@@ -368,6 +376,6 @@ public unsafe struct ImAnimClip
 
     public ImAnimResult Save(ImU8String path)
     {
-        return ImAnim.ClipSave(this.ClipId, path);
+        return ImAnim.ClipSave(ClipId, path);
     }
 }

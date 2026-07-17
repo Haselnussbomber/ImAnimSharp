@@ -1,5 +1,6 @@
 using System.Numerics;
 using System.Runtime.InteropServices;
+using Dalamud.Bindings.ImGui;
 
 namespace ImAnimSharp;
 
@@ -12,6 +13,14 @@ public unsafe struct ImAnimPath(uint pathId)
     /// Get approximate path length.
     /// </summary>
     public readonly float Length => ImAnimNative.PathLength(PathId);
+
+    /// <summary>
+    /// Start building a path at position.
+    /// </summary>
+    public static ImAnimPath Begin(ImU8String pathId, Vector2 start)
+    {
+        return ImAnim.PathBegin(ImGuiP.ImHashStr(pathId), start);
+    }
 
     /// <summary>
     /// Start building a path at position.
