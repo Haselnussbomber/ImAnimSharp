@@ -24,7 +24,7 @@ on:
 jobs:
   build:
     name: Build
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     env:
       NUGET_PACKAGES: ${{ github.workspace }}/.nuget/packages
       DALAMUD_HOME: ${{ github.workspace }}/.dalamud
@@ -50,6 +50,15 @@ jobs:
           curl -fsSL "${{ env.DALAMUD_URL }}" -o dalamud.zip
           unzip -q -o dalamud.zip -d "${{ env.DALAMUD_HOME }}"
           rm dalamud.zip
+
+      - name: Install xmake
+        run: |
+          choco install xmake -y
+          Add-Content -Path $env:GITHUB_PATH -Value "C:\Program Files\xmake"
+
+      - name: Build cpp project
+        shell: cmd
+        run: build.bat
 
       - name: Pack
         run: dotnet pack ImAnimSharp/ImAnimSharp.csproj -o dist
