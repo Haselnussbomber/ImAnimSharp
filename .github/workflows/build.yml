@@ -56,12 +56,9 @@ jobs:
           choco install xmake -y
           Add-Content -Path $env:GITHUB_PATH -Value "C:\Program Files\xmake"
 
-      - name: Build cpp project
+      - name: Build project
         shell: cmd
         run: build.bat
-
-      - name: Pack
-        run: dotnet pack ImAnimSharp/ImAnimSharp.csproj -o dist
 
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v7
